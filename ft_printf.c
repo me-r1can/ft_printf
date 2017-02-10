@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 18:02:15 by nlowe             #+#    #+#             */
-/*   Updated: 2017/02/09 16:45:53 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/02/10 16:42:21 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int		is_flag(const char c)
 		return (1);
 	return (0);
 }
+
+
 
 int		ft_printf(const char *format, ...)
 {

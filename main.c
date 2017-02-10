@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 12:51:25 by nlowe             #+#    #+#             */
-/*   Updated: 2017/02/09 16:07:38 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/02/10 16:56:23 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,9 @@ int		main(void)
 {
 //	print_args(3, "dogs", "cats", "monkeys");
 	// printf("%S\n", "dogs");
-	t_bool		test;
+	int		num = 15;
 
-	ft_putnbr(test);
-	if (test)
-		ft_putendl("yes");
-	if (!test)
-		ft_putendl("no");
-
+	printf("%e\n", num);
 	//ft_printf("%s%%%ddogs");
 	return (0);
 }
