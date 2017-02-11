@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 18:13:12 by nlowe             #+#    #+#             */
-/*   Updated: 2017/02/09 16:07:42 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/02/11 18:43:03 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@
 # include <stdlib.h>
 # include "libft.h"
 
-# define PRINTF_FLAGS "#0-+ *$L'."
+# define FT_PRINTF_FLAGS "#0-+ *$L'."
+# define FT_PRINTF_TYPES "sSpdDioOuUxXcCeEfFgGaAn"
+# define FT_PRINTF_LENGTH "hljz"
+# define FD 1
 
 typedef enum	e_bool
 {
@@ -26,14 +29,22 @@ typedef enum	e_bool
 	true = 1
 }				t_bool;
 
+typedef enum	e_length
+{
+	none = 0
+	h = 104,
+	j = 106,
+	l = 108,
+	z = 122,
+	hh = 208,
+	ll = 216
+}				t_length;
+
 typedef struct	s_arg
 {
-	t_bool		pos;
-	t_bool		left;
-	t_bool		force_sign;
-	t_bool		space;
-	t_bool		pound;
-	t_bool		zero;
+	char		flags[10];
+	int			flag_count;
+	t_length	length_flag;
 	long long	width;
 	long long	precision;
 }				t_arg;
