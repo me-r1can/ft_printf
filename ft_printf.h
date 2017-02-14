@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 18:13:12 by nlowe             #+#    #+#             */
-/*   Updated: 2017/02/11 18:43:03 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/02/14 14:53:20 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef enum	e_bool
 
 typedef enum	e_length
 {
-	none = 0
+	none = 0,
 	h = 104,
 	j = 106,
 	l = 108,
@@ -50,5 +50,6 @@ typedef struct	s_arg
 }				t_arg;
 
 int		ft_printf(const char *format, ...);
+void	test_arg(t_arg *arg);
 
 #endif

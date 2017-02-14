@@ -1,36 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   travaux.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/03 12:51:25 by nlowe             #+#    #+#             */
-/*   Updated: 2017/02/14 14:50:36 by nlowe            ###   ########.fr       */
+/*   Created: 2017/02/14 14:45:40 by nlowe             #+#    #+#             */
+/*   Updated: 2017/02/14 14:55:02 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "ft_printf.h"
-/*
-void	print_args(int ac, ...)
-{
-	va_list		args;
-	int			i;
 
-	va_start(args, ac);
-	i = 0;
-	while (i < ac)
-	{
-		ft_putstr(va_arg(args, char *));
-		ft_putchar('\n');
-		i++;
-	}
-	va_end(args);
-}
-*/
-int		main(void)
+void	test_arg(t_arg *arg)
 {
-	ft_printf("%1s");
-	return (0);
+	ft_putstr("flags: ");
+	ft_putendl(arg->flags);
+
+	ft_putstr("flag count: ");
+	ft_putnbr(arg->flag_count);
+	ft_putchar('\n');
+
+	ft_putstr("length flags: ");
+	ft_putnbr((int)(arg->length_flag));
+	ft_putchar('\n');
+
+	ft_putstr("width: ");
+	ft_putnbr((int)(arg->width));
+	ft_putchar('\n');
+
+	ft_putstr("precision: ");
+	ft_putnbr((int)(arg->precision));
+	ft_putchar('\n');
 }

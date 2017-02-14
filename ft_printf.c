@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 18:02:15 by nlowe             #+#    #+#             */
-/*   Updated: 2017/02/11 18:43:42 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/02/14 14:57:40 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,13 @@ t_arg	*create_arg(void)
 	ft_strclr(ret->flags);
 	ret->flag_count = 0;
 	ret->length_flag = none;
-	width = -1;
-	precision = -1;
+	ret->width = -1;
+	ret->precision = -1;
 	return (ret);
 }
 
-void	check_precision(const char restrict *format, va_list args, size_t *i)
+void	check_precision(const char* restrict format, t_arg *ret,
+	va_list args, int *i)
 {
 	if (format[i + 1] && format[i + 1] == '*')
 	{
@@ -55,10 +56,10 @@ void	check_precision(const char restrict *format, va_list args, size_t *i)
 		ret->precision = 0;
 }
 
-void	new_arg(const char restrict *format, va_list args)
+t_arg	*new_arg(const char* restrict format, va_list args)
 {
 	t_arg	*ret;
-	size_t	i;
+	int		i;
 
 	ret = create_arg();
 	while (!(ft_strchr(FT_PRINTF_TYPES, format[i])))
@@ -68,30 +69,36 @@ void	new_arg(const char restrict *format, va_list args)
 		else if (ft_strchr(FT_PRINTF_LENGTH, format[i]))
 			ret->length_flag = ret->length_flag + (int)format[i];
 		else if (format[i] == '.')
-			check_precision(format, args, &i);
+			check_precision(format, ret, args, &i);
 		else if (ret->width == -1 && ft_isdigit(format[i]))
 			ret->width = ft_atoi(format[i]);
 		else if (ret->width == -1 && format[i] == '*')
 			ret->width = va_arg(args, long long);
 		i++;
 	}
+	return (ret);
 }
 
-int		ft_printf(const char restrict *format, ...)
+int		ft_printf(const char* restrict format, ...)
 {
 	va_list		args;
 	int			i;
 	int			count;
+	t_arg		*current;
 
 	count = count_args(format);
 	va_start(args, format);
 	i = 0;
 	while (format[i])
 	{
+		current = create_arg();
 		if (format[i] == '%' && format[i + 1] == '%')
-			write(FD, '%', 1);
+			write(FD, "%", 1);
 		else if (format[i] == '%')
-			new_arg(format, args);
+		{
+			current = new_arg(format, args);
+			test_arg(current);
+		}
 		i++;
 	}
 	va_end(args);
