@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 18:02:15 by nlowe             #+#    #+#             */
-/*   Updated: 2017/02/14 14:57:40 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/02/14 18:16:14 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_arg	*create_arg(void)
 {
 	t_arg	*ret;
 
+	ret = NULL;
 	ft_strclr(ret->flags);
 	ret->flag_count = 0;
 	ret->length_flag = none;
@@ -41,14 +42,14 @@ t_arg	*create_arg(void)
 void	check_precision(const char* restrict format, t_arg *ret,
 	va_list args, int *i)
 {
-	if (format[i + 1] && format[i + 1] == '*')
+	if (format[*i + 1] && format[*i + 1] == '*')
 	{
 		ret->precision = va_arg(args, long long);
 		(*i)++;
 	}
-	else if (format[i + 1] && ft_isdigit(format [i + 1]))
+	else if (format[*i + 1] && ft_isdigit(format [*i + 1]))
 	{
-		ret->precision = ft_atoi(format[i + 1]);
+		ret->precision = atoi(&(format[*i + 1]));
 		while (ft_isdigit(format[*i]))
 			(*i)++;
 	}
@@ -62,6 +63,7 @@ t_arg	*new_arg(const char* restrict format, va_list args)
 	int		i;
 
 	ret = create_arg();
+	i = 0;
 	while (!(ft_strchr(FT_PRINTF_TYPES, format[i])))
 	{
 		if (ft_strchr(FT_PRINTF_FLAGS, format[i]))
@@ -71,7 +73,7 @@ t_arg	*new_arg(const char* restrict format, va_list args)
 		else if (format[i] == '.')
 			check_precision(format, ret, args, &i);
 		else if (ret->width == -1 && ft_isdigit(format[i]))
-			ret->width = ft_atoi(format[i]);
+			ret->width = atoi(&format[i]);
 		else if (ret->width == -1 && format[i] == '*')
 			ret->width = va_arg(args, long long);
 		i++;
