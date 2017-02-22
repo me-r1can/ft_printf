@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 18:13:12 by nlowe             #+#    #+#             */
-/*   Updated: 2017/02/20 15:49:33 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/02/22 17:09:03 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,18 @@
 # include <stdlib.h>
 # include "libft.h"
 
+# define BUFF_SIZE 10000
 # define FT_PRINTF_FLAGS "#0-+ $L'"
 # define FT_PRINTF_TYPES "sSpdDioOuUxXcCeEfFgGaAn"
 # define FT_PRINTF_LENGTH "hljz"
 
-typedef enum	e_bool
+typedef enum		e_bool
 {
 	false = 0,
 	true = 1
-}				t_bool;
+}					t_bool;
 
-typedef enum	e_length
+typedef enum		e_length
 {
 	none = 0,
 	h = 104,
@@ -37,20 +38,29 @@ typedef enum	e_length
 	z = 122,
 	hh = 208,
 	ll = 216
-}				t_length;
+}					t_length;
 
-typedef struct	s_arg
+typedef struct		s_arg
 {
-	char		flags[10];
-	int			flag_count;
-	t_length	length_flag;
-	long long	width;
-	long long	precision;
-	char		type;
-	void		*target;
-}				t_arg;
+	char			flags[10];
+	int				flag_count;
+	t_length		length_flag;
+	long long		width;
+	long long		precision;
+	char			type;
+	void			*target;
+}					t_arg;
 
-int		ft_printf(const char *format, ...);
-void	test_arg(t_arg *arg);
+typedef struct		s_buff
+{
+	unsigned char	contents[BUFF_SIZE];
+	size_t			pos;
+}					t_buff;
+
+int					ft_printf(const char *format, ...);
+void				test_arg(t_arg *arg);
+int					ft_putbuff(t_buff *buffer, void *contents, size_t len, int fd);
+int					ft_flushbuff(t_buff *buffer, int fd);
+
 
 #endif
