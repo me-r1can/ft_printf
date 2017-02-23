@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:05:37 by nlowe             #+#    #+#             */
-/*   Updated: 2017/02/22 17:11:06 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/02/22 21:23:09 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ int		ft_putbuff(t_buff *buffer, void *contents, size_t len, int fd)
 	while (i < len)
 	{
 		if ((buffer->pos + i + 1) >= (BUFF_SIZE))
-			ret += ft_flushbuff(buffer, fd);
+			ft_flushbuff(buffer, fd);
 		buffer->contents[buffer->pos] = c[i];
 		i++;
 		(buffer->pos)++;
 	}
-	return (ret);
+	return (i);
 }
 
 int		ft_flushbuff(t_buff *buffer, int fd)

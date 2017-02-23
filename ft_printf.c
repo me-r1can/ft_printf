@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 18:02:15 by nlowe             #+#    #+#             */
-/*   Updated: 2017/02/20 14:53:01 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/02/22 21:26:11 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_arg	*create_arg(void)
 	ret->flag_count = 0;
 	ret->length_flag = none;
 	ret->width = -1;
+	ret->len = 0;
 	ret->precision = -1;
 	ret->type = 0;
 	ret->target = NULL;
@@ -53,7 +54,7 @@ void	check_precision(const char* restrict format, t_arg *ret,
 	else if (format[*i + 1] && ft_isdigit(format [*i + 1]))
 	{
 		(*i)++;
-		ret->precision = ft_atoi(&(format[*i]));
+		ret->precision = atoi(&(format[*i]));
 		while (ft_isdigit(format[*i]))
 			(*i)++;
 		(*i)--;
@@ -76,7 +77,7 @@ t_arg	*new_arg(const char* restrict format, va_list args, int *i)
 		else if (format[*i] == '.')
 			check_precision(format, ret, args, i);
 		else if (ret->width == -1 && ft_isdigit(format[*i]))
-			ret->width = ft_atoi(&format[*i]);
+			ret->width = atoi(&format[*i]);
 		else if (ret->width == -1 && format[*i] == '*')
 			ret->width = va_arg(args, long long);
 		(*i)++;
@@ -90,27 +91,29 @@ t_arg	*new_arg(const char* restrict format, va_list args, int *i)
 int		ft_vdprintf(int fd, const char* restrict format, va_list ap)
 {
 	int			i;
-	int			count;
 	t_arg		*current;
+	t_buff		buffer;
 
-	count = count_args(format);
 	i = 0;
 	while (format[i])
 	{
 		current = create_arg();
 		if (format[i] == '%' && format[i + 1] == '%')
 		{
-			write(fd, "%", 1);
+			ft_putbuff(&buffer, "%", 1, fd);
 			i++;
 		}
 		else if (format[i] == '%')
 		{
 			current = new_arg(format, ap, &i);
 			test_arg(current);
-			ft_putendl(current->target);
+			print(&buffer, current, fd);
 		}
+		else
+			ft_putbuff(&buffer, (void *)&(format[i]), 1, fd);
 		i++;
 	}
+	ft_flushbuff(&buffer, fd);
 	return (0);
 }
 

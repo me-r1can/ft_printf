@@ -6,12 +6,14 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 18:13:12 by nlowe             #+#    #+#             */
-/*   Updated: 2017/02/22 17:09:03 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/02/22 21:35:43 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
+
+# include <stdio.h>
 
 # include <stdarg.h>
 # include <unistd.h>
@@ -46,6 +48,7 @@ typedef struct		s_arg
 	int				flag_count;
 	t_length		length_flag;
 	long long		width;
+	long long		len;
 	long long		precision;
 	char			type;
 	void			*target;
@@ -61,6 +64,8 @@ int					ft_printf(const char *format, ...);
 void				test_arg(t_arg *arg);
 int					ft_putbuff(t_buff *buffer, void *contents, size_t len, int fd);
 int					ft_flushbuff(t_buff *buffer, int fd);
+int					print(t_buff *buffer, t_arg *arg, int fd);
+
 
 
 #endif
