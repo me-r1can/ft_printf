@@ -6,20 +6,17 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 20:50:52 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/03 13:30:11 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/13 13:24:00 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 //# define FT_PRINTF_TYPES "sSpdDioOuUxXcCeEfFgGaAn"
-
-int (*print)(t_arg *arg)[FT_PRINTF_TYPE_COUNT] = {ft_printstr, ft_printwstr,
-	ft_printptr, ft_printnbr, ft_printdec, ft_printdec, ft_printdec,
-	ft_printoct, ft_printoct, ft_printdec, ft_printdec, ft_printdec,
-	ft_printchar, ft_printwchar, ft_printsci, ft_printsci, ft_printdec,
-	ft_printdec, ft_printdec, ft_printdec, ft_printhex, ft_printhex,
-	ft_printpos};
+//
+// int (*print[FT_PRINTF_TYPE_COUNT])(t_arg *arg) = {ft_printstr, ft_printwstr,
+// 	ft_printptr, ft_printdec, ft_printoct, ft_printchar, ft_printwchar,
+// 	ft_printsci, ft_printhex, ft_printpos};
 
 int		has_flag(t_arg *arg, char flag)
 {
@@ -28,15 +25,42 @@ int		has_flag(t_arg *arg, char flag)
 	return (0);
 }
 
-int		get_type(t_arg *arg)
-{
-	int		i;
+// int		get_type(t_arg *arg)
+// {
+// 	int		i;
+//
+// 	i = -1;
+// 	while (++i < FT_PRINTF_TYPE_COUNT)
+// 		if (FT_PRINTF_TYPES[i] == arg->type)
+// 			return (i);
+// 	return (-1);
+// }
 
-	i = -1;
-	while (++i < FT_PRINTF_TYPE_COUNT)
-		if (FT_PRINTF_TYPES[i] == arg->type)
-			return (i);
-	return (-1);
+t_printfunc	get_type(t_arg *arg)
+{
+	if (arg->type == 's')
+		return (ft_printstr);
+	if (arg->type == 'S')
+		return (ft_printwstr);
+	if (arg->type == 'p')
+		return (ft_printptr);
+	if (arg->type == 'd' || arg->type == 'D' || arg->type == 'i' ||
+		arg->type == 'u' || arg->type == 'U')
+		return (ft_printdec);
+	if (arg->type == 'o' || arg->type == 'O')
+		return (ft_printoct);
+	if (arg->type == 'c')
+		return (ft_printchar);
+	if (arg->type == 'C')
+		return (ft_printwchar);
+	if (arg->type == 'e' || arg->type == 'E' || arg->type == 'f' ||
+		arg->type == 'F')
+		return (ft_printsci);
+	if (arg->type == 'x' || arg->type == 'X')
+		return (ft_printhex);
+	if (arg->type == 'n')
+		return (ft_printpos);
+	return (NULL);
 }
 
 int		padding(t_buff *buffer, t_arg *arg)

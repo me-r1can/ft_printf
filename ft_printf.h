@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 18:13:12 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/03 13:13:07 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/13 12:52:01 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,20 @@ typedef enum		e_length
 	ll = 216
 }					t_length;
 
+// typedef enum		e_type
+// {
+// 	ft_printstr = 0,
+// 	ft_printwstr = 1,
+// 	ft_printptr = 2,
+// 	ft_printdec = 3,
+// 	ft_printoct = 4,
+// 	ft_printchar = 5,
+// 	ft_printwchar = 6,
+// 	ft_printsci = 7,
+// 	ft_printhex = 8,
+// 	ft_printpos = 9
+// }					t_type;
+
 typedef struct		s_arg
 {
 	char			flags[10];
@@ -61,6 +75,8 @@ typedef struct		s_buff
 	size_t			pos;
 	int				fd;
 }					t_buff;
+
+typedef int			(*t_printfunc)(t_arg *);
 
 int					ft_printf(const char *format, ...);
 void				test_arg(t_arg *arg);
