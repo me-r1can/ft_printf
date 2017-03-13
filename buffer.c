@@ -6,13 +6,13 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:05:37 by nlowe             #+#    #+#             */
-/*   Updated: 2017/02/22 21:23:09 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/03 13:01:29 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_putbuff(t_buff *buffer, void *contents, size_t len, int fd)
+int		ft_putbuff(t_buff *buffer, void *contents, size_t len)
 {
 	size_t			i;
 	unsigned char	*c;
@@ -24,7 +24,7 @@ int		ft_putbuff(t_buff *buffer, void *contents, size_t len, int fd)
 	while (i < len)
 	{
 		if ((buffer->pos + i + 1) >= (BUFF_SIZE))
-			ft_flushbuff(buffer, fd);
+			ft_flushbuff(buffer);
 		buffer->contents[buffer->pos] = c[i];
 		i++;
 		(buffer->pos)++;
@@ -32,11 +32,11 @@ int		ft_putbuff(t_buff *buffer, void *contents, size_t len, int fd)
 	return (i);
 }
 
-int		ft_flushbuff(t_buff *buffer, int fd)
+int		ft_flushbuff(t_buff *buffer)
 {
 	int		ret;
 
-	ret = write(fd, buffer->contents, buffer->pos);
+	ret = write(buffer->fd, buffer->contents, buffer->pos);
 	buffer->pos = 0;
 	ft_bzero(buffer->contents, BUFF_SIZE);
 	return (ret);
