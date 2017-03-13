@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 20:50:52 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/13 13:33:00 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/13 13:38:48 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ int		print(t_buff *buffer, t_arg *arg)
 	{
 		ret = print_specific(buffer, arg);
 		padding(buffer, arg);
-
 	}
 	else
 	{
