@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 20:50:52 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/13 13:38:48 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/14 12:36:07 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,33 +19,6 @@ int		has_flag(t_arg *arg, char flag)
 	return (0);
 }
 
-int		print_specific(t_buff *buffer, t_arg *arg)
-{
-	if (arg->type == 's')
-		return (ft_printstr(buffer, arg));
-	if (arg->type == 'S')
-		return (ft_printwstr(buffer, arg));
-	if (arg->type == 'p')
-		return (ft_printptr(buffer, arg));
-	if (arg->type == 'd' || arg->type == 'D' || arg->type == 'i' ||
-		arg->type == 'u' || arg->type == 'U')
-		return (ft_printdec(buffer, arg));
-	if (arg->type == 'o' || arg->type == 'O')
-		return (ft_printoct(buffer, arg));
-	if (arg->type == 'c')
-		return (ft_printchar(buffer, arg));
-	if (arg->type == 'C')
-		return (ft_printwchar(buffer, arg));
-	if (arg->type == 'e' || arg->type == 'E' || arg->type == 'f' ||
-		arg->type == 'F')
-		return (ft_printsci(buffer, arg));
-	if (arg->type == 'x' || arg->type == 'X')
-		return (ft_printhex(buffer, arg));
-	if (arg->type == 'n')
-		return (ft_printpos(buffer, arg));
-	return (NULL);
-}
-
 int		padding(t_buff *buffer, t_arg *arg)
 {
 	char		pad;
@@ -56,10 +29,7 @@ int		padding(t_buff *buffer, t_arg *arg)
 	if (width == -1)
 		return (0);
 	if (arg->len > arg->width)
-	{
-		arg->len = arg->width;
 		return (0);
-	}
 	if (has_flag(arg, '0'))
 	 	pad = '0';
 	while (--width >= arg->len)
@@ -69,18 +39,27 @@ int		padding(t_buff *buffer, t_arg *arg)
 
 int		print(t_buff *buffer, t_arg *arg)
 {
-	int		ret;
-
-	ret = 0;
-	if (has_flag(arg, '-'))
-	{
-		ret = print_specific(buffer, arg);
-		padding(buffer, arg);
-	}
-	else
-	{
-		padding(buffer, arg);
-		ret = print_specific(buffer, arg);
-	}
-	return (ret);
+	if (arg->type == 's')
+		return (ft_printstr(buffer, arg));
+	// if (arg->type == 'S')
+	// 	return (ft_printwstr(buffer, arg));
+	// if (arg->type == 'p')
+	// 	return (ft_printptr(buffer, arg));
+	// if (arg->type == 'd' || arg->type == 'D' || arg->type == 'i' ||
+	// 	arg->type == 'u' || arg->type == 'U')
+	// 	return (ft_printdec(buffer, arg));
+	// if (arg->type == 'o' || arg->type == 'O')
+	// 	return (ft_printoct(buffer, arg));
+	// if (arg->type == 'c')
+	// 	return (ft_printchar(buffer, arg));
+	// if (arg->type == 'C')
+	// 	return (ft_printwchar(buffer, arg));
+	// if (arg->type == 'e' || arg->type == 'E' || arg->type == 'f' ||
+	// 	arg->type == 'F')
+	// 	return (ft_printsci(buffer, arg));
+	// if (arg->type == 'x' || arg->type == 'X')
+	// 	return (ft_printhex(buffer, arg));
+	// if (arg->type == 'n')
+	// 	return (ft_printpos(buffer, arg));
+	return (0);
 }

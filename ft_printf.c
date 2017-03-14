@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 18:02:15 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/03 13:18:53 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/14 14:13:47 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ int		ft_vdprintf(int fd, const char* restrict format, va_list ap)
 
 	i = 0;
 	buffer.fd = fd;
+	ft_bzero(buffer.contents, BUFF_SIZE);
 	while (format[i])
 	{
 		current = create_arg();
