@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 18:02:15 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/14 14:13:47 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/14 15:18:22 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,34 @@ void	check_precision(const char* restrict format, t_arg *ret,
 		ret->precision = 0;
 }
 
+void	check_width(const char* restrict format, t_arg *ret, int *i)
+{
+	ret->width = atoi(&format[*i]);
+	while (ft_isdigit(format[*i]))
+		(*i)++;
+	(*i)--;
+}
+
+void	add_flag(t_arg *ret, char f)
+{
+	ret->flags[(ret->flag_count)++] = f;
+}
+
+void	add_width_flag(t_arg *ret, char f)
+{
+	if (!(ret->length_flag + f > 216))
+		ret->length_flag = ret->length_flag + (int)f;
+}
+//sSpdDioOuUxXcCeEfFgGaAn
+void	convert_caps(t_arg *ret)
+{
+	if (ret->type >= 'A' && ret->type <= 'Z')
+	{
+		add_width_flag(ret, 'l');
+		ret->type = ft_tolower(ret->type);
+	}
+}
+
 t_arg	*new_arg(const char* restrict format, va_list args, int *i)
 {
 	t_arg	*ret;
@@ -70,14 +98,14 @@ t_arg	*new_arg(const char* restrict format, va_list args, int *i)
 	ret = create_arg();
 	while (!(ft_strchr(FT_PRINTF_TYPES, format[*i])))
 	{
-		if (ret->width == -1 && ft_isdigit(format[*i]) && format[*i] != '0')
-			ret->width = atoi(&format[*i]);
+		if (ft_strchr(FT_PRINTF_FLAGS, format[*i]) && !(ft_strchr(ret->flags, format[*i])))
+			add_flag(ret, format[*i]);
+		else if (ret->width == -1 && ft_isdigit(format[*i]) && format[*i] != '0')
+			check_width(format, ret, i);
 		else if (ret->width == -1 && format[*i] == '*')
 			ret->width = va_arg(args, long long);
-		else if (ft_strchr(FT_PRINTF_FLAGS, format[*i]) && !(ft_strchr(ret->flags, format[*i])))
-			ret->flags[(ret->flag_count)++] = format[*i];
 		else if (ft_strchr(FT_PRINTF_LENGTH, format[*i]))
-			ret->length_flag = ret->length_flag + (int)format[*i];
+			add_width_flag(ret, format[*i]);
 		else if (format[*i] == '.')
 			check_precision(format, ret, args, i);
 		(*i)++;
@@ -87,6 +115,7 @@ t_arg	*new_arg(const char* restrict format, va_list args, int *i)
 	ret->target = va_arg(args, void *);
 	if (ret->len > ret->width)
 		ret->len = ret->width;
+	convert_caps(ret);
 	return (ret);
 }
 

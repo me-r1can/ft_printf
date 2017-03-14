@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 12:51:25 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/14 12:25:35 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/14 15:24:56 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		main(void)
 	// ft_bzero(buffer.contents, BUFF_SIZE);
 	// printf("chars to buff = %d\n", ft_putbuff(&buffer, av[1], ft_strlen(av[1]), 1));
 	// printf("chars to stdout = %d\n", ft_flushbuff(&buffer, 1));
-	ft_printf("%10s this is a test\n", "durr...");
-	printf("%10s this is a test\n", "durr...");
+	ft_printf("%'10S this is a test\n", "durr...");
+	//printf("%10S this is a test\n", "durr...");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:05:37 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/14 12:32:41 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/14 14:57:33 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int		ft_putbuff(t_buff *buffer, void *contents, size_t len)
 		i++;
 		(buffer->pos)++;
 	}
-	printf("Buffer pos: %zu\n", buffer->pos);
 	return (i);
 }
 
