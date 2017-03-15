@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 18:02:15 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/15 16:15:24 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/15 18:01:13 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,10 @@ int		ft_vdprintf(int fd, const char* restrict format, va_list ap)
 	int			i;
 	t_arg		*current;
 	t_buff		buffer;
+	int			ret;
 
 	i = 0;
+	ret = 0;
 	buffer.fd = fd;
 	ft_bzero(buffer.contents, BUFF_SIZE);
 	while (format[i])
@@ -140,14 +142,14 @@ int		ft_vdprintf(int fd, const char* restrict format, va_list ap)
 		{
 			current = new_arg(format, ap, &i);
 			test_arg(current);
-			print(&buffer, current);
+			ret += print(&buffer, current);
 		}
 		else
-			ft_putbuff(&buffer, (void *)&(format[i]), 1);
+			ret += ft_putbuff(&buffer, (void *)&(format[i]), 1);
 		i++;
 	}
 	ft_flushbuff(&buffer);
-	return (0);
+	return (ret);
 }
 
 int		ft_dprintf(int fd, const char* restrict format, ...)
