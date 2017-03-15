@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 20:50:52 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/14 12:36:07 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/15 16:39:00 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		padding(t_buff *buffer, t_arg *arg)
 
 int		print(t_buff *buffer, t_arg *arg)
 {
-	if (arg->type == 's')
+	if (arg->type == 's' || arg->type == 'c')
 		return (ft_printstr(buffer, arg));
 	// if (arg->type == 'S')
 	// 	return (ft_printwstr(buffer, arg));
@@ -50,8 +50,8 @@ int		print(t_buff *buffer, t_arg *arg)
 	// 	return (ft_printdec(buffer, arg));
 	// if (arg->type == 'o' || arg->type == 'O')
 	// 	return (ft_printoct(buffer, arg));
-	// if (arg->type == 'c')
-	// 	return (ft_printchar(buffer, arg));
+	if (arg->type == 'c')
+		return (ft_printchar(buffer, arg));
 	// if (arg->type == 'C')
 	// 	return (ft_printwchar(buffer, arg));
 	// if (arg->type == 'e' || arg->type == 'E' || arg->type == 'f' ||

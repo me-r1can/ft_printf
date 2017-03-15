@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 18:02:15 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/14 15:18:22 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/15 16:15:24 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	add_width_flag(t_arg *ret, char f)
 	if (!(ret->length_flag + f > 216))
 		ret->length_flag = ret->length_flag + (int)f;
 }
-//sSpdDioOuUxXcCeEfFgGaAn
+
 void	convert_caps(t_arg *ret)
 {
 	if (ret->type >= 'A' && ret->type <= 'Z')

@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 18:13:12 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/14 11:59:21 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/15 16:39:25 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int					has_flag(t_arg *arg, char flag);
 
 
 int					ft_printstr(t_buff *buffer, t_arg *arg);
+int					ft_printchar(t_buff *buffer, t_arg *arg);
 
 
 #endif

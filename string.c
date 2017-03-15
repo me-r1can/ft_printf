@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 11:21:23 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/14 14:48:55 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/15 16:42:34 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,27 @@ int		ft_printstr(t_buff *buffer, t_arg *arg)
 	{
 		ret += padding(buffer, arg);
 		ret = ft_putbuff(buffer, str, arg->len);
+	}
+	return (ret);
+}
+
+int		ft_printchar(t_buff *buffer, t_arg *arg)
+{
+	char		str;
+	long long	ret;
+
+	str = (char)arg->target;
+	ret = 0;
+	arg->len = 1;
+	if (has_flag(arg, '-'))
+	{
+		ret = ft_putbuff(buffer, &str, arg->len);
+		ret += padding(buffer, arg);
+	}
+	else
+	{
+		ret += padding(buffer, arg);
+		ret = ft_putbuff(buffer, &str, arg->len);
 	}
 	return (ret);
 }
