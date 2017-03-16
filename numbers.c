@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 21:19:04 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/16 21:51:28 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/16 21:53:04 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ unsigned long long	convert(t_arg *arg, unsigned long long nbr)
 		return ((size_t)nbr);
 	if (arg->length_flag == h)
 		return ((short)nbr);
-
 }
 
 unsigned long long	negative(t_arg *arg, int *negative)
