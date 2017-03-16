@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 18:13:12 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/15 17:58:47 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/16 15:11:46 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # define FT_PRINTF_TYPES "sSpdDioOuUxXcCeEfFgGaAn"
 # define FT_PRINTF_TYPE_COUNT 23
 # define FT_PRINTF_LENGTH "hljz"
+
+//pdDioOuUxXeEfFgGaAn
 
 typedef enum		e_bool
 {
@@ -73,6 +75,10 @@ int					has_flag(t_arg *arg, char flag);
 
 int					ft_printstr(t_buff *buffer, t_arg *arg);
 int					ft_printchar(t_buff *buffer, t_arg *arg);
+int					ft_printwchar(t_buff *buffer, wchar_t c);
+size_t				ft_wcslen(wchar_t *s);
+int					ft_printwstr(t_buff *buffer, t_arg *arg);
+
 
 
 #endif

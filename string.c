@@ -6,19 +6,19 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 11:21:23 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/15 18:39:00 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/16 15:05:14 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_printstr(t_buff *buffer, t_arg *arg)
+int		ft_printnstr(t_buff *buffer, t_arg *arg)
 {
 	char		*str;
 	int			ret;
 
-	str = (char *)arg->target;
 	ret = 0;
+	str = (char *)arg->target;
 	arg->len = ft_strlen(str);
 	if (arg->precision != -1 && arg->precision < arg->len)
 		arg->len = arg->precision;
@@ -35,43 +35,33 @@ int		ft_printstr(t_buff *buffer, t_arg *arg)
 	return (ret);
 }
 
+int		ft_printnchar(t_buff *buffer, char c)
+{
+	return (ft_putbuff(buffer, &c, 1));
+}
+
 int		ft_printchar(t_buff *buffer, t_arg *arg)
 {
-	char		str;
-	int			ret;
+	int		ret;
 
-	str = (char)arg->target;
 	ret = 0;
 	arg->len = 1;
-	if (has_flag(arg, '-'))
-	{
-		ret += ft_putbuff(buffer, &str, arg->len);
+	if (!(has_flag(arg, '-')))
 		ret += padding(buffer, arg);
-	}
+	if (arg->length_flag == l)
+		ret += ft_printwchar(buffer, (wchar_t)arg->target);
 	else
-	{
+		ret += ft_printnchar(buffer, (char)arg->target);
+	if (has_flag(arg, '-'))
 		ret += padding(buffer, arg);
-		ret += ft_putbuff(buffer, &str, arg->len);
-	}
 	return (ret);
 }
 
-int		ft_printwstr(t_buff *buffer, t_arg *arg)
+int		ft_printstr(t_buff *buffer, t_arg *arg)
 {
-	char		*str;
-	long long	ret;
-
-	str = (char *)arg->target;
-	arg->len = ft_strlen(str);
-	if (has_flag(arg, '-'))
-	{
-		ret = ft_putbuff(buffer, str, arg->len);
-		padding(buffer, arg);
-	}
-	else
-	{
-		padding(buffer, arg);
-		ret = ft_putbuff(buffer, str, arg->len);
-	}
-	return (ret);
+	if (!(arg->target))
+		arg->target = "(null)";
+	if (arg->length_flag == l)
+		return (ft_printwstr(buffer, arg));
+	return (ft_printnstr(buffer, arg));
 }
