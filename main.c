@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 12:51:25 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/18 18:52:11 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/18 20:06:10 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int		main(void)
 	printf("---> return: %d\n", ft_printf("|%.1s %.1ls %5c %10lc this is a test|\n", s, str, c, x));
 	printf("---> return: %d\n", printf("|%.1s %.1ls %5c %10lc this is a test|\n", s, str, c, x));
 
-	printf("---> return: %d\n", ft_printf("|%d|\n", 12));
-	printf("---> return: %d\n", printf("|%d|\n", 12));
+	printf("---> return: %d\n", ft_printf("|%d|\n", 0));
+	printf("---> return: %d\n", printf("|%d|\n", 0));
 
 	return (0);
 }

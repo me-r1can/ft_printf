@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 21:19:04 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/18 19:12:26 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/18 20:05:17 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,36 +57,43 @@ int					get_base(t_arg *arg)
 	return (10);
 }
 
-void	ft_swap(char *a, char *b)
+int					ft_nbrlen(unsigned long long nbr, int base)
 {
-	char	c;
+	int		len;
 
-	c = *a;
-	*a = *b;
-	*b = c;
+	len = 0;
+	if (nbr == 0)
+		return (1);
+	while (nbr != 0)
+	{
+		nbr /= base;
+		len++;
+	}
+	return (len);
+}
+
+void	ft_setnbr(t_arg *arg, unsigned long long nbr)
+{
+	
 }
 
 int					ft_printnbr(t_buff *buffer, t_arg *arg)
 {
 	char				out[MAX_INT_SIZE];
 	int					i;
-	int					j;
 	unsigned long long	nbr;
 	unsigned long long	base;
 	int					negative;
 
 	nbr = get_negative(arg, &negative);
 	base = get_base(arg);
-	ft_bzero(out, MAX_INT_SIZE);
-	i = 0;
-	j = 0;
+	ft_memset(out, '0', MAX_INT_SIZE);
+	arg->len = ft_nbrlen(nbr, base);
+	i = (int)arg->len - 1;
 	while (nbr != 0)
 	{
-		out[i++] = HEX[nbr % base];
+		out[i--] = HEX[nbr % base];
 		nbr /= base;
 	}
-	arg->len = i;
-	while (j < arg->len)
-		ft_swap(&(out[j++]), &(out[i--]));
-	return(ft_putbuff(buffer, out, i));
+	return(ft_putbuff(buffer, out, arg->len));
 }
