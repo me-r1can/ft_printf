@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 12:51:25 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/16 15:21:12 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/18 18:52:11 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,9 @@ int		main(void)
 	wchar_t x = L'X';
 	printf("---> return: %d\n", ft_printf("|%.1s %.1ls %5c %10lc this is a test|\n", s, str, c, x));
 	printf("---> return: %d\n", printf("|%.1s %.1ls %5c %10lc this is a test|\n", s, str, c, x));
+
+	printf("---> return: %d\n", ft_printf("|%d|\n", 12));
+	printf("---> return: %d\n", printf("|%d|\n", 12));
+
 	return (0);
 }

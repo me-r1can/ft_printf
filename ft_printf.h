@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 18:13:12 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/16 21:34:11 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/18 18:57:27 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@
 # define FT_PRINTF_TYPES "sSpdDioOuUxXcCeEfFgGaAn"
 # define FT_PRINTF_TYPE_COUNT 23
 # define FT_PRINTF_LENGTH "hljz"
+# define HEX "0123456789ABCDEF"
+# define SMALL_HEX "0123456789abcdef"
+# define MAX_INT_SIZE 50
 
 //pdDioOuUxXeEfFgGaAn
 
@@ -79,6 +82,7 @@ int					ft_printwchar(t_buff *buffer, wchar_t c);
 size_t				ft_wcslen(wchar_t *s);
 int					ft_printwstr(t_buff *buffer, t_arg *arg);
 
+int					ft_printnbr(t_buff *buffer, t_arg *arg);
 
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 20:50:52 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/16 14:53:32 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/18 18:48:14 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ int		print(t_buff *buffer, t_arg *arg)
 	// 	return (ft_printwstr(buffer, arg));
 	// if (arg->type == 'p')
 	// 	return (ft_printptr(buffer, arg));
-	// if (arg->type == 'd' || arg->type == 'D' || arg->type == 'i' ||
-	// 	arg->type == 'u' || arg->type == 'U')
-	// 	return (ft_printdec(buffer, arg));
+	if (arg->type == 'd' || arg->type == 'D' || arg->type == 'i' ||
+		arg->type == 'u' || arg->type == 'U')
+		return (ft_printnbr(buffer, arg));
 	// if (arg->type == 'o' || arg->type == 'O')
 	// 	return (ft_printoct(buffer, arg));
 	if (arg->type == 'c')
