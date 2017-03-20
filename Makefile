@@ -6,15 +6,17 @@
 #    By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/17 21:11:30 by nlowe             #+#    #+#              #
-#    Updated: 2017/03/20 18:31:44 by nlowe            ###   ########.fr        #
+#    Updated: 2017/03/20 21:29:13 by nlowe            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
 SRC_PATH = src
-SRC_NAME = buffer.c \
+SRC_NAME = arguments.c \
+			buffer.c \
 			controller.c \
+			format.c \
 			ft_printf.c \
 			numbers.c \
 			string.c \

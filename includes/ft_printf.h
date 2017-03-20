@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 18:13:12 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/20 18:09:28 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/20 21:57:55 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # define BUFF_SIZE 10000
 # define FT_PRINTF_FLAGS "#0-+ $L'"
 # define FT_PRINTF_TYPES "sSpdDioOuUxXcCnb"
-# define FT_PRINTF_TYPE_COUNT 16
 # define FT_PRINTF_LENGTH "hljz"
 # define HEX "0123456789ABCDEF"
 # define SMALL_HEX "0123456789abcdef"
@@ -77,6 +76,20 @@ int					print(t_buff *buffer, t_arg *arg, int count);
 int					padding(t_buff *buffer, t_arg *arg);
 int					has_flag(t_arg *arg, char flag);
 void				add_flag(t_arg *ret, char f);
+void				add_length_flag(t_arg *ret, char f);
+t_arg				create_arg(void);
+void				new_arg(const char* restrict format, va_list args,
+	int *i, t_arg *current);
+
+void				check_precision(const char * restrict format, t_arg *ret,
+	va_list args, int *i);
+void				check_width(const char* restrict format, t_arg *ret, int *i);
+void				convert_caps(t_arg *ret);
+
+unsigned long long	get_negative(t_arg *arg);
+int					prefix_count(t_arg *arg);
+long long			signed_convert(t_arg *arg);
+unsigned long long	unsigned_convert(t_arg *arg);
 
 int					ft_printstr(t_buff *buffer, t_arg *arg);
 int					ft_printchar(t_buff *buffer, t_arg *arg);

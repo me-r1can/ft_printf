@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 11:21:23 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/16 15:05:14 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/20 21:26:46 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,9 @@ int		ft_printchar(t_buff *buffer, t_arg *arg)
 	arg->len = 1;
 	if (!(has_flag(arg, '-')))
 		ret += padding(buffer, arg);
-	if (arg->length_flag == l)
+	if (arg->type == '%')
+		ret += ft_printnchar(buffer, '%');
+	else if (arg->length_flag == l)
 		ret += ft_printwchar(buffer, (wchar_t)arg->target);
 	else
 		ret += ft_printnchar(buffer, (char)arg->target);
