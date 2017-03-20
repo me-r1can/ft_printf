@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 12:51:25 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/18 20:06:10 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/20 17:31:09 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,17 @@ int		main(void)
 	char *s = "string";
 	wchar_t *str = L"WSTRING";
 	wchar_t x = L'X';
+//	int test = 0;
+	//int *p = &test;
+
 	printf("---> return: %d\n", ft_printf("|%.1s %.1ls %5c %10lc this is a test|\n", s, str, c, x));
 	printf("---> return: %d\n", printf("|%.1s %.1ls %5c %10lc this is a test|\n", s, str, c, x));
 
-	printf("---> return: %d\n", ft_printf("|%d|\n", 0));
-	printf("---> return: %d\n", printf("|%d|\n", 0));
+	printf("---> return: %d\n", ft_printf("|%-#*X|\n", 10, 225));
+	printf("---> return: %d\n", printf("|%-#*X|\n", 10, 225));
+
+	printf("---> return: %d\n", ft_printf("|%#lx|\n", s));
+	printf("---> return: %d\n", printf("|%p|\n", s));
 
 	return (0);
 }

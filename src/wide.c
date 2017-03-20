@@ -6,13 +6,13 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 13:52:56 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/16 15:11:19 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/20 18:42:36 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_wcsize(int c)
+static int		ft_wcsize(int c)
 {
 	int		len;
 
@@ -24,7 +24,7 @@ static int	ft_wcsize(int c)
 	return (len);
 }
 
-size_t		ft_wcslen(wchar_t *s)
+size_t			ft_wcslen(wchar_t *s)
 {
 	size_t	len;
 
@@ -37,7 +37,7 @@ size_t		ft_wcslen(wchar_t *s)
 	return (len);
 }
 
-static void	convert_unicode(wchar_t c, char *bits, int *i, int len)
+static void		convert_unicode(wchar_t c, char *bits, int *i, int len)
 {
 	if (len >= 8)
 	{

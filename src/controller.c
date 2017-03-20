@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flags.c                                            :+:      :+:    :+:   */
+/*   controller.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 20:50:52 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/18 18:48:14 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/20 18:31:38 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,29 +37,28 @@ int		padding(t_buff *buffer, t_arg *arg)
 	return (arg->width - arg->len);
 }
 
-int		print(t_buff *buffer, t_arg *arg)
+int		print(t_buff *buffer, t_arg *arg, int count)
 {
+	int		*n;
+
+	if (arg->type == 'n')
+	{
+		n = (int *)arg->target;
+		*n = count;
+		return (0);
+	}
+	if (arg->type == 'p')
+	{
+		arg->length_flag = l;
+		add_flag(arg, '#');
+		arg->type = 'x';
+		return (ft_printnbr(buffer, arg));
+	}
 	if (arg->type == 's')
 		return (ft_printstr(buffer, arg));
-	// if (arg->type == 'S')
-	// 	return (ft_printwstr(buffer, arg));
-	// if (arg->type == 'p')
-	// 	return (ft_printptr(buffer, arg));
-	if (arg->type == 'd' || arg->type == 'D' || arg->type == 'i' ||
-		arg->type == 'u' || arg->type == 'U')
-		return (ft_printnbr(buffer, arg));
-	// if (arg->type == 'o' || arg->type == 'O')
-	// 	return (ft_printoct(buffer, arg));
 	if (arg->type == 'c')
 		return (ft_printchar(buffer, arg));
-	// if (arg->type == 'C')
-	// 	return (ft_printwchar(buffer, arg));
-	// if (arg->type == 'e' || arg->type == 'E' || arg->type == 'f' ||
-	// 	arg->type == 'F')
-	// 	return (ft_printsci(buffer, arg));
-	// if (arg->type == 'x' || arg->type == 'X')
-	// 	return (ft_printhex(buffer, arg));
-	// if (arg->type == 'n')
-	// 	return (ft_printpos(buffer, arg));
+	else
+		return (ft_printnbr(buffer, arg));
 	return (0);
 }

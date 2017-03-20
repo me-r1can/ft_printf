@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 18:02:15 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/16 21:19:55 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/20 18:44:22 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_arg	*create_arg(void)
 	return (ret);
 }
 
-void	check_precision(const char* restrict format, t_arg *ret,
+void	check_precision(const char * restrict format, t_arg *ret,
 	va_list args, int *i)
 {
 	if (format[*i + 1] && format[*i + 1] == '*')
@@ -51,7 +51,7 @@ void	check_precision(const char* restrict format, t_arg *ret,
 		ret->precision = va_arg(args, long long);
 		(*i)++;
 	}
-	else if (format[*i + 1] && ft_isdigit(format [*i + 1]))
+	else if (format[*i + 1] && ft_isdigit(format[*i + 1]))
 	{
 		(*i)++;
 		ret->precision = atoi(&(format[*i]));
@@ -84,7 +84,8 @@ void	add_width_flag(t_arg *ret, char f)
 
 void	convert_caps(t_arg *ret)
 {
-	if (ret->type >= 'A' && ret->type <= 'Z')
+	if (ret->type != 'X' && ret->type != 'O' &&
+		ret->type >= 'A' && ret->type <= 'Z')
 	{
 		add_width_flag(ret, 'l');
 		ret->type = ft_tolower(ret->type);
@@ -98,9 +99,11 @@ t_arg	*new_arg(const char* restrict format, va_list args, int *i)
 	ret = create_arg();
 	while (!(ft_strchr(FT_PRINTF_TYPES, format[*i])))
 	{
-		if (ft_strchr(FT_PRINTF_FLAGS, format[*i]) && !(ft_strchr(ret->flags, format[*i])))
+		if (ft_strchr(FT_PRINTF_FLAGS, format[*i])
+			&& !(ft_strchr(ret->flags, format[*i])))
 			add_flag(ret, format[*i]);
-		else if (ret->width == -1 && ft_isdigit(format[*i]) && format[*i] != '0')
+		else if (ret->width == -1 && ft_isdigit(format[*i])
+			&& format[*i] != '0')
 			check_width(format, ret, i);
 		else if (ret->width == -1 && format[*i] == '*')
 			ret->width = va_arg(args, long long);
@@ -113,13 +116,11 @@ t_arg	*new_arg(const char* restrict format, va_list args, int *i)
 	if (format[*i] && ft_strchr(FT_PRINTF_TYPES, format[*i]))
 		ret->type = format[*i];
 	ret->target = va_arg(args, void *);
-	if (ret->len > ret->width)
-		ret->len = ret->width;
 	convert_caps(ret);
 	return (ret);
 }
 
-int		ft_vdprintf(int fd, const char* restrict format, va_list ap)
+int		ft_vdprintf(int fd, const char * restrict format, va_list ap)
 {
 	int			i;
 	t_arg		*current;
@@ -135,14 +136,14 @@ int		ft_vdprintf(int fd, const char* restrict format, va_list ap)
 		current = create_arg();
 		if (format[i] == '%' && format[i + 1] == '%')
 		{
-			ft_putbuff(&buffer, "%", 1);
+			ret += ft_putbuff(&buffer, "%", 1);
 			i++;
 		}
 		else if (format[i] == '%')
 		{
 			current = new_arg(format, ap, &i);
-			test_arg(current);
-			ret += print(&buffer, current);
+			//test_arg(current);
+			ret += print(&buffer, current, ret);
 		}
 		else
 			ret += ft_putbuff(&buffer, (void *)&(format[i]), 1);
@@ -152,7 +153,7 @@ int		ft_vdprintf(int fd, const char* restrict format, va_list ap)
 	return (ret);
 }
 
-int		ft_dprintf(int fd, const char* restrict format, ...)
+int		ft_dprintf(int fd, const char * restrict format, ...)
 {
 	va_list		ap;
 
