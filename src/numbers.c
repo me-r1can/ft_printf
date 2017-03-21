@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 21:19:04 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/20 22:01:35 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/21 12:04:57 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		ft_nbrlen(unsigned long long nbr, int base)
 	int		len;
 
 	len = 0;
-	if (nbr == 0)
+	if (nbr == 0 && base == 10)
 		return (1);
 	while (nbr != 0)
 	{

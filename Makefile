@@ -6,7 +6,7 @@
 #    By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/17 21:11:30 by nlowe             #+#    #+#              #
-#    Updated: 2017/03/20 21:29:13 by nlowe            ###   ########.fr        #
+#    Updated: 2017/03/21 11:59:29 by nlowe            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRC_NAME = arguments.c \
 			controller.c \
 			format.c \
 			ft_printf.c \
+			conversions.c \
 			numbers.c \
 			string.c \
 			travaux.c \
@@ -39,8 +40,8 @@ OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT)
-	libtool -static -o $@ $(OBJ) $(addprefix $(LIBFT_PATH)/,$(LIBFT))
-	ranlib $(NAME)
+	@libtool -static -o $@ $(OBJ) $(addprefix $(LIBFT_PATH)/,$(LIBFT))
+	@ranlib $(NAME)
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir -p $(OBJ_PATH)
@@ -58,5 +59,8 @@ fclean: clean
 	@make fclean -C$(LIBFT_PATH)
 
 re: fclean all
+
+withmain: $(NAME)
+	$(CC) $(CFLAGS) $(IFLAGS) -L. -lftprintf -o test.out src/main.c
 
 .PHONYL: all, clean, fclean, re
