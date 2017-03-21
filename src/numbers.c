@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 21:19:04 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/21 12:04:57 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/21 16:00:57 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		ft_setnbr(t_buff *buffer, t_arg *arg, int len,
 
 	ft_memset(out, '0', MAX_INT_SIZE);
 	i = len - 1;
-	while (nbr != 0)
+	while (nbr != 0 && i >= 0)
 	{
 		if (arg->type == 'X' || arg->type == 'O')
 			out[i--] = HEX[nbr % arg->base];
