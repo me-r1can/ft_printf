@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 21:15:50 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/20 22:05:45 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/23 17:02:00 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	convert_caps(t_arg *ret)
 	if (ret->type != 'X' && ret->type != 'O' &&
 		ret->type >= 'A' && ret->type <= 'Z')
 	{
-		add_length_flag(ret, 'l');
+		ret->length_flag = l;
 		ret->type = ft_tolower(ret->type);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 12:51:25 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/23 14:39:34 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/23 17:10:20 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,23 +57,42 @@ int		main(void)
 
 #define VALUE 0
 
-#define DECIMAL "|%u|\n"
+#define DECIMAL "|%.d %.0d %lU|\n"
 
 	printf("\n---DECIMAL---\n");
-	printf("u---> return: %ud\n", ft_printf(DECIMAL, VALUE));
-	printf("s---> return: %ud\n", printf(DECIMAL, VALUE));
+	printf("u---> return: %d\n", ft_printf(DECIMAL, 42, 43, 4294967296));
+	printf("s---> return: %d\n", printf(DECIMAL, 42, 43, 4294967296));
 
-#define OCTAL "|%#.1o|\n"
+#define OCTAL "|%#0.0o|\n"
 
 	printf("\n---OCTAL---\n");
 	printf("u---> return: %d\n", ft_printf(OCTAL, VALUE));
 	printf("s---> return: %d\n", printf(OCTAL, VALUE));
 
-#define HEXA "|%#.1x|\n"
+#define HEXA "|%#x|\n"
 
 	printf("\n---HEX---\n");
 	printf("u---> return: %d\n", ft_printf(HEXA, VALUE));
 	printf("s---> return: %d\n", printf(HEXA, VALUE));
+
+#define PERCENT "|%%|\n"
+
+	printf("\n---PERCENT---\n");
+	printf("u---> return: %d\n", ft_printf(PERCENT));
+	printf("s---> return: %d\n", printf(PERCENT));
+
+#define SIZE_T "|%zd|\n"
+
+	printf("\n---SIZE_T---\n");
+	printf("u---> return: %d\n", ft_printf(SIZE_T, 4294967295));
+	printf("s---> return: %d\n", printf(SIZE_T, 4294967295));
+
+#define PTR "|%p|\n"
+
+	printf("\n---POINTER---\n");
+	printf("u---> return: %d\n", ft_printf(PTR, NULL));
+	printf("s---> return: %d\n", printf(PTR, NULL));
+
 
 	return (0);
 }

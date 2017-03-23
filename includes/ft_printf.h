@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 18:13:12 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/20 21:57:55 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/23 16:16:24 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 # define BUFF_SIZE 10000
 # define FT_PRINTF_FLAGS "#0-+ $L'"
-# define FT_PRINTF_TYPES "sSpdDioOuUxXcCnb"
+# define FT_PRINTF_TYPES "sSpdDioOuUxXcCnb%"
 # define FT_PRINTF_LENGTH "hljz"
 # define HEX "0123456789ABCDEF"
 # define SMALL_HEX "0123456789abcdef"
@@ -100,5 +100,8 @@ int					ft_printwstr(t_buff *buffer, t_arg *arg);
 int					ft_printnbr(t_buff *buffer, t_arg *arg);
 
 int					ft_printptr(t_buff *buffer, t_arg *arg);
+
+int					is_hex(char c);
+int					is_oct(char c);
 
 #endif

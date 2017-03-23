@@ -6,7 +6,7 @@
 #    By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/17 21:11:30 by nlowe             #+#    #+#              #
-#    Updated: 2017/03/21 11:59:29 by nlowe            ###   ########.fr        #
+#    Updated: 2017/03/23 15:42:45 by nlowe            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRC_NAME = arguments.c \
 			string.c \
 			travaux.c \
 			wide.c \
+			flags.c
 
 LIBFT = libft.a
 LIBFT_PATH = libft

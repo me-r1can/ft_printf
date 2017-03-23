@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 21:55:06 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/20 21:56:18 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/23 17:08:50 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ unsigned long long	get_negative(t_arg *arg)
 	long long			l;
 
 	arg->negative = 0;
-	if (arg->type == 'd' || arg->type == 'i')
+	if (arg->target == NULL)
+		return (0);
+	if ((arg->type == 'd' || arg->type == 'i') &&
+		arg->length_flag != z && arg->length_flag != j)
 	{
 		l = signed_convert(arg);
 		if (l < 0)
@@ -36,12 +39,11 @@ int					prefix_count(t_arg *arg)
 {
 	if (arg->negative)
 		return (1);
-	if (has_flag(arg, ' '))
-		return (1);
 	if (has_flag(arg, '+'))
 		return (1);
-	if ((arg->type == 'x' || arg->type == 'X' || arg->type == 'b')
-		&& has_flag(arg, '#'))
+	if (has_flag(arg, ' '))
+		return (1);
+	if ((is_hex(arg->type) || arg->type == 'b')	&& has_flag(arg, '#'))
 		return (2);
 	if ((arg->type == 'o' || arg->type == 'O') && has_flag(arg, '#'))
 		return (1);
@@ -75,7 +77,7 @@ unsigned long long	unsigned_convert(t_arg *arg)
 		return ((unsigned long)arg->target);
 	if (arg->length_flag == ll)
 		return ((unsigned long long)arg->target);
-	if (arg->length_flag == j)
+	if (arg->length_flag == j || arg->length_flag == z)
 		return ((size_t)arg->target);
 	if (arg->length_flag == h)
 		return ((unsigned short)arg->target);

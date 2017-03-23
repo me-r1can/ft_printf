@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 20:50:52 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/23 13:34:05 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/23 17:11:18 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int		padding(t_buff *buffer, t_arg *arg)
 		return (0);
 	if (arg->len > arg->width)
 		return (0);
-	if (has_flag(arg, '0') && !(has_flag(arg, '-')))
+	if (has_flag(arg, '0') && !(has_flag(arg, '-'))
+		&& (arg->precision == -1 || arg->precision > arg->width))
 		pad = '0';
 	while (--width >= arg->len)
 		ft_putbuff(buffer, &pad, 1);
@@ -51,7 +52,6 @@ int		print(t_buff *buffer, t_arg *arg, int count)
 	{
 		arg->length_flag = l;
 		add_flag(arg, '#');
-		arg->type = 'x';
 	}
 	if (arg->type == 's')
 		return (ft_printstr(buffer, arg));
