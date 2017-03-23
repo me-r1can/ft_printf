@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 12:51:25 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/23 17:10:20 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/23 18:59:34 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,23 @@ void	print_args(int ac, ...)
 	va_end(args);
 }
 */
+
+static void test_simple_mix(void)
+{
+	// test->debug = 1;
+	ft_printf("s: %s, p: %p, d:%d\n\n", "a string", &test_simple_mix, 42);
+	printf("s: %s, p: %p, d:%d\n\n", "a string", &test_simple_mix, 42);
+}
+
+static void test_super_mix(void)
+{
+	// test->debug = 1;
+	ft_printf("%s%p%d%d%p%s%p%p%s\n\n",
+		"a", &free, 1, 2, &malloc, "b", &free, &malloc, "c")  ;
+	printf("%s%p%d%d%p%s%p%p%s\n\n",
+		"a", &free, 1, 2, &malloc, "b", &free, &malloc, "c")  ;
+}
+
 int		main(void)
 {
 	// t_buff	buffer;
@@ -89,10 +106,16 @@ int		main(void)
 
 #define PTR "|%p|\n"
 
+	int i = 9;
+	int * j = &i;
 	printf("\n---POINTER---\n");
-	printf("u---> return: %d\n", ft_printf(PTR, NULL));
-	printf("s---> return: %d\n", printf(PTR, NULL));
+	printf("u---> return: %d\n", ft_printf(PTR, j));
+	printf("s---> return: %d\n", printf(PTR, j));
 
+	ft_printf("%");
+
+	test_simple_mix();
+	test_super_mix();
 
 	return (0);
 }

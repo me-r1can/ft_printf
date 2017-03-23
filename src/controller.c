@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 20:50:52 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/23 17:11:18 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/23 18:50:03 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ int		padding(t_buff *buffer, t_arg *arg)
 int		print(t_buff *buffer, t_arg *arg, int count)
 {
 	int		*n;
-
+	if (arg->type == 0)
+		return (0);
 	if (arg->type == 'n')
 	{
 		n = (int *)arg->target;
