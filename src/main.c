@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 12:51:25 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/21 12:00:52 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/23 14:39:34 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,25 @@ int		main(void)
 	// printf("---> return: %d\n", ft_printf("|%#lx|\n", s));
 	// printf("---> return: %d\n", printf("|%p|\n", s));
 
-	printf("---> return: %d\n", ft_printf("%-05d", 42));
-	printf("---> return: %d\n", printf("%-05d", 42));
+#define VALUE 0
+
+#define DECIMAL "|%u|\n"
+
+	printf("\n---DECIMAL---\n");
+	printf("u---> return: %ud\n", ft_printf(DECIMAL, VALUE));
+	printf("s---> return: %ud\n", printf(DECIMAL, VALUE));
+
+#define OCTAL "|%#.1o|\n"
+
+	printf("\n---OCTAL---\n");
+	printf("u---> return: %d\n", ft_printf(OCTAL, VALUE));
+	printf("s---> return: %d\n", printf(OCTAL, VALUE));
+
+#define HEXA "|%#.1x|\n"
+
+	printf("\n---HEX---\n");
+	printf("u---> return: %d\n", ft_printf(HEXA, VALUE));
+	printf("s---> return: %d\n", printf(HEXA, VALUE));
 
 	return (0);
 }

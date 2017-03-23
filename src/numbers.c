@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 21:19:04 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/21 16:00:57 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/23 14:45:52 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		ft_nbrlen(unsigned long long nbr, int base)
 	int		len;
 
 	len = 0;
-	if (nbr == 0 && base == 10)
+	if (nbr == 0 && (base == 10 || base == 16))
 		return (1);
 	while (nbr != 0)
 	{
@@ -56,41 +56,50 @@ int		ft_setnbr(t_buff *buffer, t_arg *arg, int len,
 	return (ft_putbuff(buffer, out, len));
 }
 
-int		ft_printsign(t_buff *buffer, t_arg *arg)
+int		ft_printsign(t_buff *buffer, t_arg *arg, unsigned long long nbr)
 {
 	if (arg->negative)
 		return (ft_putbuff(buffer, "-", 1));
+	if (arg->type == 'u' || arg->type == 'U')
+		return (0);
 	if (has_flag(arg, ' '))
 		return (ft_putbuff(buffer, " ", 1));
 	if (has_flag(arg, '+'))
 		return (ft_putbuff(buffer, "+", 1));
+	if ((arg->type == 'o' || arg->type == 'O') && has_flag(arg, '#'))
+		return (ft_putbuff(buffer, "0", 1));
+	if (nbr == 0)
+		return (0);
 	if ((arg->type == 'x' || arg->type == 'X'
 		|| arg->type == 'b') && has_flag(arg, '#'))
 		return ((ft_putbuff(buffer, "0", 1) +
 			ft_putbuff(buffer, &(arg->type), 1)));
-		if ((arg->type == 'o' || arg->type == 'O') && has_flag(arg, '#'))
-		return (ft_putbuff(buffer, "0", 1));
 	return (0);
 }
 
 int		ft_printnbr(t_buff *buffer, t_arg *arg)
 {
 	int					ret;
-	int					len;
+	int					digits;
 	unsigned long long	nbr;
 
 	ret = 0;
 	nbr = get_negative(arg);
 	arg->base = get_base(arg);
-	len = ft_nbrlen(nbr, arg->base);
-	arg->len = len;
-	if (arg->precision != -1 && arg->precision > arg->len)
-		arg->len = arg->precision;
+	digits = ft_nbrlen(nbr, arg->base);
+	if (arg->precision != -1 && arg->precision > digits)
+	{
+		digits = arg->precision;
+		if (arg->type == 'o' || arg->type == 'O')
+			digits -= 1;
+	}
+	arg->len = digits;
 	arg->len += prefix_count(arg);
 	if (!(has_flag(arg, '-')))
 		ret += padding(buffer, arg);
-	ret += ft_printsign(buffer, arg);
-	ret += ft_setnbr(buffer, arg, len, nbr);
+	ret += ft_printsign(buffer, arg, nbr);
+	if (digits > 0)
+		ret += ft_setnbr(buffer, arg, digits, nbr);
 	if (has_flag(arg, '-'))
 		ret += padding(buffer, arg);
 	return (ret);
