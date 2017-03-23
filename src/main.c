@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 12:51:25 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/23 18:59:34 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/23 19:12:17 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,11 +106,10 @@ int		main(void)
 
 #define PTR "|%p|\n"
 
-	int i = 9;
-	int * j = &i;
+	int i;
 	printf("\n---POINTER---\n");
-	printf("u---> return: %d\n", ft_printf(PTR, j));
-	printf("s---> return: %d\n", printf(PTR, j));
+	printf("u---> return: %d\n", ft_printf(PTR, &i));
+	printf("s---> return: %d\n", printf(PTR, &i));
 
 	ft_printf("%");
 

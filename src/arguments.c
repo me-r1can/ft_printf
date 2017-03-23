@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 21:17:52 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/23 18:49:33 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/23 19:31:12 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,12 @@ t_arg	create_arg(void)
 
 void	new_arg(const char *restrict format, va_list args, int *i, t_arg *ret)
 {
-	if (format[*i + 1])
-		*i += 1;
-	else
+	int		start;
+
+	start = *i;
+	if (!(format[*i + 1]))
 		return ;
+	*i += 1;
 	while (format[*i] && !(ft_strchr(FT_PRINTF_TYPES, format[*i])))
 	{
 		if (ft_strchr(FT_PRINTF_FLAGS, format[*i])
@@ -47,12 +49,17 @@ void	new_arg(const char *restrict format, va_list args, int *i, t_arg *ret)
 			add_length_flag(ret, format[*i]);
 		else if (format[*i] == '.')
 			check_precision(format, ret, args, i);
+		else
+			return ;
 		(*i)++;
 	}
 	if (format[*i] && ft_strchr(FT_PRINTF_TYPES, format[*i]))
 		ret->type = format[*i];
 	else
+	{
+		*i = start;
 		return ;
+	}
 	if (!(ret->type == '%'))
 		ret->target = va_arg(args, void *);
 	convert_caps(ret);

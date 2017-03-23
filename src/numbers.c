@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 21:19:04 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/23 17:14:41 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/23 19:17:07 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ int		ft_printsign(t_buff *buffer, t_arg *arg, unsigned long long nbr)
 		return (ft_putbuff(buffer, "0", 1));
 	if (nbr == 0 && arg->type != 'p')
 		return (0);
+	if (arg->type == 'p')
+		arg->type = 'x';
 	if ((is_hex(arg->type) || arg->type == 'b') && has_flag(arg, '#'))
 		return ((ft_putbuff(buffer, "0", 1) +
 			ft_putbuff(buffer, &(arg->type), 1)));
