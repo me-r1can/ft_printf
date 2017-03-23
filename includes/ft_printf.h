@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 18:13:12 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/23 16:16:24 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/23 19:36:59 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ int					has_flag(t_arg *arg, char flag);
 void				add_flag(t_arg *ret, char f);
 void				add_length_flag(t_arg *ret, char f);
 t_arg				create_arg(void);
-void				new_arg(const char* restrict format, va_list args,
-	int *i, t_arg *current);
+int					new_arg(const char* restrict format, va_list args,
+	int i, t_arg *current);
 
 void				check_precision(const char * restrict format, t_arg *ret,
 	va_list args, int *i);
