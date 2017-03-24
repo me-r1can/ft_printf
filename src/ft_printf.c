@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 18:02:15 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/23 19:40:19 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/24 16:34:07 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		ft_vdprintf(int fd, const char *restrict format, va_list ap)
 			current = create_arg();
 			if (i += new_arg(format, ap, i, &current))
 				ret += print(&buffer, &current, ret);
-			//test_arg(&current);
+			// test_arg(&current);
 		}
 		else
 			ret += ft_putbuff(&buffer, (void *)&(format[i]), 1);

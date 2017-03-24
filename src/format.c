@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 21:15:50 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/23 17:02:00 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/24 16:18:05 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	check_precision(const char *restrict format, t_arg *ret,
 	else if (format[*i + 1] && ft_isdigit(format[*i + 1]))
 	{
 		(*i)++;
-		ret->precision = atoi(&(format[*i]));
+		ret->precision = ft_atoi(&(format[*i]));
 		while (ft_isdigit(format[*i]))
 			(*i)++;
 		(*i)--;
@@ -34,7 +34,7 @@ void	check_precision(const char *restrict format, t_arg *ret,
 
 void	check_width(const char *restrict format, t_arg *ret, int *i)
 {
-	ret->width = atoi(&format[*i]);
+	ret->width = ft_atoi(&format[*i]);
 	while (ft_isdigit(format[*i]))
 		(*i)++;
 	(*i)--;

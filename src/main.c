@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 12:51:25 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/23 19:12:17 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/24 16:37:23 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,13 @@ int		main(void)
 	// printf("---> return: %d\n", ft_printf("|%#lx|\n", s));
 	// printf("---> return: %d\n", printf("|%p|\n", s));
 
-#define VALUE 0
+#define VALUE 42
 
-#define DECIMAL "|%.d %.0d %lU|\n"
+#define DECIMAL "|%+    d|\n"
 
 	printf("\n---DECIMAL---\n");
-	printf("u---> return: %d\n", ft_printf(DECIMAL, 42, 43, 4294967296));
-	printf("s---> return: %d\n", printf(DECIMAL, 42, 43, 4294967296));
+	printf("u---> return: %d\n", ft_printf(DECIMAL, VALUE));
+//	printf("s---> return: %d\n", printf(DECIMAL, VALUE));
 
 #define OCTAL "|%#0.0o|\n"
 
@@ -115,6 +115,8 @@ int		main(void)
 
 	test_simple_mix();
 	test_super_mix();
+
+	ft_printf("%15.4S", L"我是一只猫。");
 
 	return (0);
 }
