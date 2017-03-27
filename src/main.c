@@ -6,12 +6,15 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 12:51:25 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/24 16:37:23 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/27 15:33:52 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "ft_printf.h"
+#include <math.h>
+#include <stdlib.h>
+#include <limits.h>
 /*
 void	print_args(int ac, ...)
 {
@@ -80,13 +83,13 @@ int		main(void)
 	printf("u---> return: %d\n", ft_printf(DECIMAL, VALUE));
 //	printf("s---> return: %d\n", printf(DECIMAL, VALUE));
 
-#define OCTAL "|%#0.0o|\n"
+#define OCTAL "|%O|\n"
 
 	printf("\n---OCTAL---\n");
-	printf("u---> return: %d\n", ft_printf(OCTAL, VALUE));
-	printf("s---> return: %d\n", printf(OCTAL, VALUE));
+	printf("u---> return: %d\n", ft_printf(OCTAL, 159));
+	printf("s---> return: %d\n", printf(OCTAL, 159));
 
-#define HEXA "|%#x|\n"
+#define HEXA "|%#X|\n"
 
 	printf("\n---HEX---\n");
 	printf("u---> return: %d\n", ft_printf(HEXA, VALUE));
@@ -111,12 +114,28 @@ int		main(void)
 	printf("u---> return: %d\n", ft_printf(PTR, &i));
 	printf("s---> return: %d\n", printf(PTR, &i));
 
-	ft_printf("%");
+#define WCHAR "|%S|\n"
+
+	// wchar_t *wstr = L"我是一只猫。";
+	// wchar_t *wstr = L"test...";
+	wchar_t *wstr = NULL;
+	ft_printf("\n---WIDE STRING---\n");
+	printf("u---> return: %d\n", ft_printf(WCHAR, wstr));
+	printf("s---> return: %d\n", printf(WCHAR, wstr));
+
+#define BINARY "|%.8#b|\n"
+
+	int	b = 2;
+	ft_printf("\n---BINARY---\n");
+	printf("u---> return: %d\n", ft_printf(BINARY, b));
+
+#define MIXED "%s %C %d %p %x %% %S", "bonjour ", L'該', 42, &free, 42, L"لحم خنزير"
+	ft_printf("\n---MIXED---\n");
+	printf("u---> return: %d\n", ft_printf(MIXED));
+	printf("s---> return: %d\n", printf(MIXED));
 
 	test_simple_mix();
 	test_super_mix();
-
-	ft_printf("%15.4S", L"我是一只猫。");
 
 	return (0);
 }

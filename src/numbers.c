@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 21:19:04 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/23 19:17:07 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/27 14:38:51 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int		get_base(t_arg *arg)
 		return (16);
 	if (is_oct(arg->type))
 		return (8);
+	if (arg->type == 'b' || arg->type == 'B')
+		return (2);
 	return (10);
 }
 

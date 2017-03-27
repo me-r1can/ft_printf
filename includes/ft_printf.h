@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 18:13:12 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/23 19:36:59 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/27 15:09:26 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define HEX "0123456789ABCDEF"
 # define SMALL_HEX "0123456789abcdef"
 # define MAX_INT_SIZE 50
+# define MAX_WCHAR 0x10FFFF
 
 //pdDioOuUxXeEfFgGaAn
 

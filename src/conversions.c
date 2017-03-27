@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 21:55:06 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/23 17:08:50 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/27 15:12:35 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ unsigned long long	get_negative(t_arg *arg)
 	arg->negative = 0;
 	if (arg->target == NULL)
 		return (0);
-	if ((arg->type == 'd' || arg->type == 'i') &&
-		arg->length_flag != z && arg->length_flag != j)
+	if ((arg->type == 'd' || arg->type == 'i'))
 	{
 		l = signed_convert(arg);
 		if (l < 0)
@@ -61,6 +60,8 @@ long long			signed_convert(t_arg *arg)
 	if (arg->length_flag == ll)
 		return ((long long)arg->target);
 	if (arg->length_flag == j)
+		return ((uintmax_t)arg->target);
+	if (arg->length_flag == z)
 		return ((size_t)arg->target);
 	if (arg->length_flag == h)
 		return ((short)arg->target);
@@ -77,7 +78,9 @@ unsigned long long	unsigned_convert(t_arg *arg)
 		return ((unsigned long)arg->target);
 	if (arg->length_flag == ll)
 		return ((unsigned long long)arg->target);
-	if (arg->length_flag == j || arg->length_flag == z)
+	if (arg->length_flag == j)
+		return ((intmax_t)arg->target);
+	if (arg->length_flag == z)
 		return ((size_t)arg->target);
 	if (arg->length_flag == h)
 		return ((unsigned short)arg->target);
