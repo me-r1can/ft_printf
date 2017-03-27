@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 18:13:12 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/27 15:09:26 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/27 17:32:43 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <wchar.h>
 # include "libft.h"
 
 # define BUFF_SIZE 10000

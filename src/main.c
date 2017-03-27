@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 12:51:25 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/27 15:33:52 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/27 17:43:19 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 #include <math.h>
 #include <stdlib.h>
 #include <limits.h>
+#include <errno.h>
+#include <locale.h>
+#include <wchar.h>
+
+
 /*
 void	print_args(int ac, ...)
 {
@@ -32,7 +37,7 @@ void	print_args(int ac, ...)
 	va_end(args);
 }
 */
-
+/*
 static void test_simple_mix(void)
 {
 	// test->debug = 1;
@@ -48,7 +53,7 @@ static void test_super_mix(void)
 	printf("%s%p%d%d%p%s%p%p%s\n\n",
 		"a", &free, 1, 2, &malloc, "b", &free, &malloc, "c")  ;
 }
-
+*/
 int		main(void)
 {
 	// t_buff	buffer;
@@ -75,6 +80,8 @@ int		main(void)
 	// printf("---> return: %d\n", ft_printf("|%#lx|\n", s));
 	// printf("---> return: %d\n", printf("|%p|\n", s));
 
+//setlocale(LC_ALL, "en_US.utf8");
+
 #define VALUE 42
 
 #define DECIMAL "|%+    d|\n"
@@ -95,7 +102,7 @@ int		main(void)
 	printf("u---> return: %d\n", ft_printf(HEXA, VALUE));
 	printf("s---> return: %d\n", printf(HEXA, VALUE));
 
-#define PERCENT "|%%|\n"
+#define PERCENT "|.%.%.%.%.%.%.%.%.|\n"
 
 	printf("\n---PERCENT---\n");
 	printf("u---> return: %d\n", ft_printf(PERCENT));
@@ -114,14 +121,15 @@ int		main(void)
 	printf("u---> return: %d\n", ft_printf(PTR, &i));
 	printf("s---> return: %d\n", printf(PTR, &i));
 
-#define WCHAR "|%S|\n"
+#define WCHAR "{%30ls}"
+#define WCHAR_VALUE L"我是一只猫。"
 
 	// wchar_t *wstr = L"我是一只猫。";
 	// wchar_t *wstr = L"test...";
-	wchar_t *wstr = NULL;
 	ft_printf("\n---WIDE STRING---\n");
-	printf("u---> return: %d\n", ft_printf(WCHAR, wstr));
-	printf("s---> return: %d\n", printf(WCHAR, wstr));
+	printf("s---> return: %d\n", printf(WCHAR, WCHAR_VALUE));
+//	printf("u---> return: %d\n", ft_printf(WCHAR, WCHAR_VALUE));
+	printf("strerror: %s\n", strerror(errno));
 
 #define BINARY "|%.8#b|\n"
 
@@ -133,9 +141,9 @@ int		main(void)
 	ft_printf("\n---MIXED---\n");
 	printf("u---> return: %d\n", ft_printf(MIXED));
 	printf("s---> return: %d\n", printf(MIXED));
-
+/*
 	test_simple_mix();
 	test_super_mix();
-
+*/
 	return (0);
 }
