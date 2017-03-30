@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 12:51:25 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/29 17:12:13 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/30 14:44:06 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void test_simple_mix(void)
 	ft_printf("s: %s, p: %p, d:%d\n\n", "a string", &test_simple_mix, 42);
 	printf("s: %s, p: %p, d:%d\n\n", "a string", &test_simple_mix, 42);
 }
-
+*/
 static void test_super_mix(void)
 {
 	// test->debug = 1;
@@ -53,7 +53,7 @@ static void test_super_mix(void)
 	printf("%s%p%d%d%p%s%p%p%s\n\n",
 		"a", &free, 1, 2, &malloc, "b", &free, &malloc, "c")  ;
 }
-*/
+
 int		main(void)
 {
 	// t_buff	buffer;
@@ -80,7 +80,7 @@ int		main(void)
 	// printf("---> return: %d\n", ft_printf("|%#lx|\n", s));
 	// printf("---> return: %d\n", printf("|%p|\n", s));
 
-//setlocale(LC_ALL, "en_US.utf8");
+setlocale(LC_ALL, "en_US.utf8");
 
 #define VALUE 42
 
@@ -127,7 +127,7 @@ int		main(void)
 	// wchar_t *wstr = L"我是一只猫。";
 	// wchar_t *wstr = L"test...";
 	ft_printf("\n---WIDE STRING---\n");
-	printf("s---> return: %d\n", printf(WCHAR, WCHAR_VALUE));
+	printf("s---> return: %d\n", printf(WCHAR, NULL));
 //	printf("u---> return: %d\n", ft_printf(WCHAR, WCHAR_VALUE));
 	printf("strerror: %s\n", strerror(errno));
 
@@ -141,9 +141,9 @@ int		main(void)
 	ft_printf("\n---MIXED---\n");
 	printf("u---> return: %d\n", ft_printf(MIXED));
 	printf("s---> return: %d\n", printf(MIXED));
-/*
-	test_simple_mix();
+
+	// test_simple_mix();
 	test_super_mix();
-*/
+
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 13:52:56 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/29 17:59:58 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/30 14:30:30 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,9 @@ int				ft_printwstr(t_buff *buffer, t_arg *arg)
 
 	ret = 0;
 	i = 0;
-	str = (wchar_t *)arg->target;
-	arg->len = ft_wcslen(str);
-	if (arg->len == 0)
+	if (!(str = (wchar_t *)arg->target))
 		return (ft_putbuff(buffer, "(null)", 6));
+	arg->len = ft_wcslen(str);
 	if (arg->precision != -1 && arg->precision < arg->len)
 			arg->len = arg->precision;
 	if (!(has_flag(arg, '-')))
