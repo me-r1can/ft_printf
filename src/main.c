@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 12:51:25 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/30 14:44:06 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/30 17:44:36 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int		main(void)
 	// printf("---> return: %d\n", ft_printf("|%#lx|\n", s));
 	// printf("---> return: %d\n", printf("|%p|\n", s));
 
-setlocale(LC_ALL, "en_US.utf8");
+// setlocale(LC_ALL, "en_US.utf8");
 
 #define VALUE 42
 
@@ -90,11 +90,11 @@ setlocale(LC_ALL, "en_US.utf8");
 	printf("u---> return: %d\n", ft_printf(DECIMAL, VALUE));
 //	printf("s---> return: %d\n", printf(DECIMAL, VALUE));
 
-#define OCTAL "|%O|\n"
+#define OCTAL "|%+O|\n"
 
 	printf("\n---OCTAL---\n");
-	printf("u---> return: %d\n", ft_printf(OCTAL, 159));
-	printf("s---> return: %d\n", printf(OCTAL, 159));
+	printf("u---> return: %d\n", ft_printf(OCTAL, 42));
+//	printf("s---> return: %d\n", printf(OCTAL, 0));
 
 #define HEXA "|%#X|\n"
 
@@ -122,14 +122,20 @@ setlocale(LC_ALL, "en_US.utf8");
 	printf("s---> return: %d\n", printf(PTR, &i));
 
 #define WCHAR "{%30ls}"
-#define WCHAR_VALUE L"我是一只猫。"
+#define WCHAR_VALUE NULL
 
 	// wchar_t *wstr = L"我是一只猫。";
 	// wchar_t *wstr = L"test...";
 	ft_printf("\n---WIDE STRING---\n");
-	printf("s---> return: %d\n", printf(WCHAR, NULL));
-//	printf("u---> return: %d\n", ft_printf(WCHAR, WCHAR_VALUE));
+	//printf("s---> return: %d\n", printf(WCHAR, WCHAR_VALUE));
+	printf("u---> return: %d\n", ft_printf(WCHAR, NULL));
 	printf("strerror: %s\n", strerror(errno));
+
+#define SSS "|%4.15ls", L"我是一只猫。|\n", NULL
+
+	printf("\n---STRING---\n");
+	printf("u---> return: %d\n", ft_printf(SSS));
+	printf("s---> return: %d\n", printf(SSS));
 
 #define BINARY "|%.8#b|\n"
 
@@ -137,10 +143,10 @@ setlocale(LC_ALL, "en_US.utf8");
 	ft_printf("\n---BINARY---\n");
 	printf("u---> return: %d\n", ft_printf(BINARY, b));
 
-#define MIXED "%s %C %d %p %x %% %S", "bonjour ", L'該', 42, &free, 42, L"لحم خنزير"
-	ft_printf("\n---MIXED---\n");
-	printf("u---> return: %d\n", ft_printf(MIXED));
-	printf("s---> return: %d\n", printf(MIXED));
+// #define MIXED "%s %C %d %p %x %% %ls", "bonjour ", L'該', 42, &free, 42, L"لحم خنزير"
+// 	ft_printf("\n---MIXED---\n");
+// 	printf("u---> return: %d\n", ft_printf(MIXED));
+// 	printf("s---> return: %d\n", printf(MIXED));
 
 	// test_simple_mix();
 	test_super_mix();

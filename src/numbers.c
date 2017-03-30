@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 21:19:04 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/27 14:38:51 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/30 18:09:04 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,18 @@ int		ft_printsign(t_buff *buffer, t_arg *arg, unsigned long long nbr)
 		return (ft_putbuff(buffer, "-", 1));
 	if (arg->type == 'u' || arg->type == 'U')
 		return (0);
-	if (has_flag(arg, '+'))
+	if (has_flag(arg, '+') && arg->base == 10)
 		return (ft_putbuff(buffer, "+", 1));
 	if (has_flag(arg, ' '))
 		return (ft_putbuff(buffer, " ", 1));
+	if (nbr == 0 && arg->type != 'p' && arg->precision == -1)
+		return (0);
 	if (is_oct(arg->type) && has_flag(arg, '#'))
 		return (ft_putbuff(buffer, "0", 1));
-	if (nbr == 0 && arg->type != 'p')
-		return (0);
 	if (arg->type == 'p')
 		arg->type = 'x';
-	if ((is_hex(arg->type) || arg->type == 'b') && has_flag(arg, '#'))
+	if ((is_hex(arg->type) || arg->type == 'b') && has_flag(arg, '#') &&
+		arg->precision != 0)
 		return ((ft_putbuff(buffer, "0", 1) +
 			ft_putbuff(buffer, &(arg->type), 1)));
 	return (0);

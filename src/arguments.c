@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 21:17:52 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/29 17:55:46 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/30 18:31:43 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_arg		create_arg(void)
 	ret.precision = -1;
 	ret.type = 0;
 	ret.target = NULL;
+	ret.widestr = NULL;
 	return (ret);
 }
 
@@ -66,10 +67,11 @@ int			new_arg(const char *restrict format, va_list args, int start, t_arg *ret)
 		ret->type = format[i];
 	else
 		return (0);
-	if (!(ret->type == '%'))
-		ret->target = va_arg(args, void *);
-	else if (!(va_arg(args, void *)))
-		return (0);
+	// ret->type = format[i];
 	convert_caps(ret);
+	if (ret->type == 's' && ret->length_flag >= l)
+		ret->widestr = va_arg(args, wchar_t *);
+	else if (!(ret->type == '%'))
+		ret->target = va_arg(args, void *);
 	return (i - start);
 }

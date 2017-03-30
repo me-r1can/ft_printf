@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 18:13:12 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/27 17:32:43 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/30 18:11:05 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct		s_arg
 	int				negative;
 	char			type;
 	void			*target;
+	wchar_t			*widestr;
 }					t_arg;
 
 typedef struct		s_buff
@@ -96,7 +97,7 @@ unsigned long long	unsigned_convert(t_arg *arg);
 int					ft_printstr(t_buff *buffer, t_arg *arg);
 int					ft_printchar(t_buff *buffer, t_arg *arg);
 int					ft_printwchar(t_buff *buffer, wchar_t c);
-size_t				ft_wcslen(wchar_t *s);
+size_t				ft_wcslen(wchar_t *s, long long precision);
 int					ft_printwstr(t_buff *buffer, t_arg *arg);
 
 int					ft_printnbr(t_buff *buffer, t_arg *arg);
@@ -105,5 +106,6 @@ int					ft_printptr(t_buff *buffer, t_arg *arg);
 
 int					is_hex(char c);
 int					is_oct(char c);
+int					is_number(char c);
 
 #endif

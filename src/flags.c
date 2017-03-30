@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 15:39:43 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/23 17:11:33 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/30 18:14:34 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,14 @@ int		is_hex(char c)
 int		is_oct(char c)
 {
 	if (c == 'o' || c == 'O')
+		return (1);
+	return (0);
+}
+
+int		is_number(char c)
+{
+	if (c == 'd' || c == 'i' || c == 'o' || c == 'u' || c == 'x' || c == 'X' ||
+		c == 'p')
 		return (1);
 	return (0);
 }

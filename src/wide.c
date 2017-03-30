@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 13:52:56 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/30 14:30:30 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/30 18:05:15 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,21 @@ static int		ft_wcsize(int c)
 	return (len);
 }
 
-size_t			ft_wcslen(wchar_t *s)
+size_t			ft_wcslen(wchar_t *s, long long precision)
 {
 	size_t	len;
+	size_t	prev;
 
 	len = 0;
-
-	while (*s)
+	while (*s && (precision == -1 || len <= (size_t)precision))
 	{
+		prev = len;
 		len += (ft_wcsize(*s) / 4);
 		s++;
 	}
-	return (len);
+	if (len <= (size_t)precision)
+		return (len);
+	return (prev);
 }
 
 static void		convert_unicode(wchar_t c, char *bits, int *i, int len)
@@ -78,25 +81,27 @@ int				ft_printwchar(t_buff *buffer, wchar_t c)
 
 int				ft_printwstr(t_buff *buffer, t_arg *arg)
 {
-	wchar_t		*str;
 	int			ret;
 	int			i;
 
 	ret = 0;
 	i = 0;
-	if (!(str = (wchar_t *)arg->target))
-		return (ft_putbuff(buffer, "(null)", 6));
-	arg->len = ft_wcslen(str);
-	if (arg->precision != -1 && arg->precision < arg->len)
-			arg->len = arg->precision;
+	if (!(arg->widestr))
+	{
+		arg->length_flag = 0;
+		return (ft_printstr(buffer, arg));
+	}
+	arg->len = ft_wcslen(arg->widestr, arg->precision);
+	// printf("len = %lld\n", arg->len);
 	if (!(has_flag(arg, '-')))
 		ret += padding(buffer, arg);
-	while (*str && i < arg->len)
+	while (*(arg->widestr) && i < (int)(arg->len))
 	{
-		ret += ft_printwchar(buffer, *str);
-		str++;
-		i++;
+		// printf("i = %d\nlen = %lld\n\n", i, arg->len);
+		i += ft_printwchar(buffer, *(arg->widestr));
+		arg->widestr++;
 	}
+	ret += i;
 	if (has_flag(arg, '-'))
 		ret += padding(buffer, arg);
 	return (ret);

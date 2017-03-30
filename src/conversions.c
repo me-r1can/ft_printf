@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 21:55:06 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/27 15:12:35 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/30 16:12:22 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int					prefix_count(t_arg *arg)
 {
 	if (arg->negative)
 		return (1);
-	if (has_flag(arg, '+'))
+	if (has_flag(arg, '+') && arg->base == 10)
 		return (1);
 	if (has_flag(arg, ' '))
 		return (1);

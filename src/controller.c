@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 20:50:52 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/30 14:26:37 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/30 18:20:13 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,13 @@ int		padding(t_buff *buffer, t_arg *arg)
 		return (0);
 	if (arg->len > arg->width)
 		return (0);
-	if (has_flag(arg, '0') && !(has_flag(arg, '-'))
-		&& (arg->precision == -1 || arg->precision > arg->width))
-		pad = '0';
+	if (has_flag(arg, '0') && !(has_flag(arg, '-')))
+	{
+		if (!(is_number(arg->type)))
+			pad = '0';
+		else if ((arg->precision == -1 || arg->precision > arg->width))
+			pad = '0';
+	}
 	while (--width >= arg->len)
 		ft_putbuff(buffer, &pad, 1);
 	return (arg->width - arg->len);
@@ -40,7 +44,6 @@ int		padding(t_buff *buffer, t_arg *arg)
 
 int		print(t_buff *buffer, t_arg *arg, int count)
 {
-//	printf("type: %c\n", arg->type);
 	int		*n;
 	if (arg->type == 0)
 		return (0);
@@ -59,5 +62,8 @@ int		print(t_buff *buffer, t_arg *arg, int count)
 		return (ft_printstr(buffer, arg));
 	if (arg->type == 'c' || arg->type == '%')
 		return (ft_printchar(buffer, arg));
-	return (ft_printnbr(buffer, arg));
+	if (is_number(arg->type))
+		return (ft_printnbr(buffer, arg));
+	arg->target = &(arg->type);
+	return (ft_printchar(buffer, arg));
 }
