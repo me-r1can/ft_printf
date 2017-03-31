@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 21:15:50 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/27 14:57:03 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/31 17:26:17 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ void	add_length_flag(t_arg *ret, char f)
 
 void	convert_caps(t_arg *ret)
 {
-	if (ret->type != 'X' && ret->type >= 'A' && ret->type <= 'Z')
+	if (!(ft_strchr(FT_PRINTF_FLAGS, ret->type)))
+		ret->length_flag = 0;
+	else if (ret->type != 'X')
 	{
 		ret->length_flag = l;
 		ret->type = ft_tolower(ret->type);

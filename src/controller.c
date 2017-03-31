@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 20:50:52 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/30 18:20:13 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/31 17:19:01 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,5 @@ int		print(t_buff *buffer, t_arg *arg, int count)
 		return (ft_printchar(buffer, arg));
 	if (is_number(arg->type))
 		return (ft_printnbr(buffer, arg));
-	arg->target = &(arg->type);
 	return (ft_printchar(buffer, arg));
 }

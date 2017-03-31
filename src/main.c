@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 12:51:25 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/30 17:44:36 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/03/31 17:31:31 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,9 @@ int		main(void)
 
 	// test_simple_mix();
 	test_super_mix();
+
+	//printf("u---> return: %d\n", ft_printf("%10z", &free));
+	printf("s---> return: %d\n", printf("%10z", &free));
 
 	return (0);
 }
