@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 12:51:25 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/31 17:31:31 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/04/02 23:58:57 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int		main(void)
 	// printf("---> return: %d\n", ft_printf("|%#lx|\n", s));
 	// printf("---> return: %d\n", printf("|%p|\n", s));
 
-// setlocale(LC_ALL, "en_US.utf8");
+setlocale(LC_ALL, "en_US.utf8");
 
 #define VALUE 42
 
@@ -108,7 +108,7 @@ int		main(void)
 	printf("u---> return: %d\n", ft_printf(PERCENT));
 	printf("s---> return: %d\n", printf(PERCENT));
 
-#define SIZE_T "|%zd|\n"
+#define SIZE_T "|%zu|\n"
 
 	printf("\n---SIZE_T---\n");
 	printf("u---> return: %d\n", ft_printf(SIZE_T, 4294967295));
@@ -131,7 +131,7 @@ int		main(void)
 	printf("u---> return: %d\n", ft_printf(WCHAR, NULL));
 	printf("strerror: %s\n", strerror(errno));
 
-#define SSS "|%4.15ls", L"我是一只猫。|\n", NULL
+#define SSS "|%4.15s|\n", "TEST"
 
 	printf("\n---STRING---\n");
 	printf("u---> return: %d\n", ft_printf(SSS));
@@ -149,9 +149,9 @@ int		main(void)
 // 	printf("s---> return: %d\n", printf(MIXED));
 
 	// test_simple_mix();
-	test_super_mix();
+	// test_super_mix();
 
-	//printf("u---> return: %d\n", ft_printf("%10z", &free));
+	printf("u---> return: %d\n", ft_printf("%10z", &free));
 	printf("s---> return: %d\n", printf("%10z", &free));
 
 	return (0);

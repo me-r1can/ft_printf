@@ -6,7 +6,7 @@
 #    By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/17 21:11:30 by nlowe             #+#    #+#              #
-#    Updated: 2017/03/23 15:42:45 by nlowe            ###   ########.fr        #
+#    Updated: 2017/04/02 22:30:10 by nlowe            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,6 @@ fclean: clean
 re: fclean all
 
 withmain: $(NAME)
-	$(CC) $(CFLAGS) $(IFLAGS) -L. -lftprintf -o test.out src/main.c
+	$(CC) $(IFLAGS) -L. -lftprintf -o test.out src/main.c
 
 .PHONYL: all, clean, fclean, re
