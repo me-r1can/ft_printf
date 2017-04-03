@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 20:50:52 by nlowe             #+#    #+#             */
-/*   Updated: 2017/04/02 23:54:33 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/04/03 16:43:12 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		has_flag(t_arg *arg, char flag)
 int		padding(t_buff *buffer, t_arg *arg)
 {
 	char		pad;
-	long long	width;
+	int			width;
 
 	pad = ' ';
 	width = arg->width;

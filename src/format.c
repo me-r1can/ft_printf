@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 21:15:50 by nlowe             #+#    #+#             */
-/*   Updated: 2017/04/03 15:42:14 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/04/03 17:07:47 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,14 @@
 void	check_precision(const char *restrict format, t_arg *ret,
 	va_list args, int *i)
 {
+	int		temp;
+
 	if (format[*i + 1] && format[*i + 1] == '*')
 	{
-		if (!(ret->precision = va_arg(args, long long)))
-			ret->precision = -1;
+		if (!(temp = va_arg(args, int)))
+			temp = 0;
+		if (ret->precision == -1)
+			ret->precision = temp;
 		(*i)++;
 	}
 	else if (format[*i + 1] && ft_isdigit(format[*i + 1]))
@@ -31,14 +35,30 @@ void	check_precision(const char *restrict format, t_arg *ret,
 	}
 	else
 		ret->precision = 0;
+	if (ret->precision < -1)
+		ret->precision = -1;
 }
 
-void	check_width(const char *restrict format, t_arg *ret, int *i)
+void	check_width(const char *restrict format, t_arg *ret,
+	va_list args, int *i)
 {
-	ret->width = ft_atoi(&format[*i]);
-	while (ft_isdigit(format[*i]))
-		(*i)++;
-	(*i)--;
+	if (format[*i] == '*')
+	{
+		if (!(ret->width = va_arg(args, int)))
+			ret->width = -1;
+	}
+	else
+	{
+		ret->width = ft_atoi(&format[*i]);
+		while (ft_isdigit(format[*i]))
+			(*i)++;
+		(*i)--;
+	}
+	if (ret->width < -1)
+	{
+		add_flag(ret, '-');
+		ret->width *= -1;
+	}
 }
 
 void	add_flag(t_arg *ret, char f)

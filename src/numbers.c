@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 21:19:04 by nlowe             #+#    #+#             */
-/*   Updated: 2017/04/03 15:17:55 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/04/03 17:10:45 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,35 +58,7 @@ int		ft_setnbr(t_buff *buffer, t_arg *arg, int len,
 	}
 	return (ft_putbuff(buffer, out, len));
 }
-/*
-int		ft_printsign(t_buff *buffer, t_arg *arg, unsigned long long nbr, int print)
-{
-	char	ret[2];
-	int		i;
 
-	i = 0;
-	if (arg->negative)
-		return (ft_putbuff(buffer, "-", 1));
-	if (arg->type == 'u' || arg->type == 'U')
-		return (0);
-	if (has_flag(arg, '+') && arg->base == 10)
-		return (ft_putbuff(buffer, "+", 1));
-	if (has_flag(arg, ' ') && !(is_hex(arg->type)))
-		return (ft_putbuff(buffer, " ", 1));
-	if (nbr == 0 && arg->type != 'p' && arg->precision == -1)
-		return (0);
-	if (is_oct(arg->type) && has_flag(arg, '#'))
-		return (ft_putbuff(buffer, "0", 1));
-	if (arg->type == 'p')
-		return ((ft_putbuff(buffer, "0", 1) +
-			ft_putbuff(buffer, "x", 1)));
-	if ((is_hex(arg->type) || arg->type == 'b') && has_flag(arg, '#') &&
-		arg->precision != 0)
-		return ((ft_putbuff(buffer, "0", 1) +
-			ft_putbuff(buffer, &(arg->type), 1)));
-	return (0);
-}
-*/
 int		ft_printsign(t_buff *buffer, t_arg *arg, unsigned long long nbr, int print)
 {
 	char	ret[4];

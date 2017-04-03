@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 13:52:56 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/30 18:05:15 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/04/03 17:10:19 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int		ft_wcsize(int c)
 	return (len);
 }
 
-size_t			ft_wcslen(wchar_t *s, long long precision)
+size_t			ft_wcslen(wchar_t *s, int precision)
 {
 	size_t	len;
 	size_t	prev;
@@ -92,12 +92,10 @@ int				ft_printwstr(t_buff *buffer, t_arg *arg)
 		return (ft_printstr(buffer, arg));
 	}
 	arg->len = ft_wcslen(arg->widestr, arg->precision);
-	// printf("len = %lld\n", arg->len);
 	if (!(has_flag(arg, '-')))
 		ret += padding(buffer, arg);
 	while (*(arg->widestr) && i < (int)(arg->len))
 	{
-		// printf("i = %d\nlen = %lld\n\n", i, arg->len);
 		i += ft_printwchar(buffer, *(arg->widestr));
 		arg->widestr++;
 	}

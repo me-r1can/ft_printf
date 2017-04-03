@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 14:45:40 by nlowe             #+#    #+#             */
-/*   Updated: 2017/04/03 14:28:21 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/04/03 16:52:44 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,13 @@ void	test_arg(t_arg *arg)
 	ft_putnbr((int)(arg->length_flag));
 	ft_putchar('\n');
 	ft_putstr("width: ");
-	ft_putnbr((int)(arg->width));
+	ft_putnbr((arg->width));
 	ft_putchar('\n');
 	ft_putstr("precision: ");
-	ft_putnbr((int)(arg->precision));
+	ft_putnbr((arg->precision));
 	ft_putchar('\n');
 	ft_putstr("type: ");
 	ft_putchar((arg->type));
-	printf("len: %lld\n", arg->len);
+	ft_putchar('\n');
+	printf("len: %d\n", arg->len);
 }

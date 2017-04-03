@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 18:13:12 by nlowe             #+#    #+#             */
-/*   Updated: 2017/04/03 15:42:28 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/04/03 16:52:15 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ typedef struct		s_arg
 	char			flags[10];
 	int				flag_count;
 	t_length		length_flag;
-	long long		width;
-	long long		len;
-	long long		precision;
+	int				width;
+	int				len;
+	int				precision;
 	int				base;
 	int				sign;
 	char			type;
@@ -86,7 +86,8 @@ int					new_arg(const char* restrict format, va_list args,
 
 void				check_precision(const char * restrict format, t_arg *ret,
 	va_list args, int *i);
-void				check_width(const char* restrict format, t_arg *ret, int *i);
+void				check_width(const char * restrict format, t_arg *ret,
+	va_list args, int *i);
 void				convert_caps(t_arg *ret);
 
 unsigned long long	get_negative(t_arg *arg);
@@ -97,7 +98,7 @@ unsigned long long	unsigned_convert(t_arg *arg);
 int					ft_printstr(t_buff *buffer, t_arg *arg);
 int					ft_printchar(t_buff *buffer, t_arg *arg);
 int					ft_printwchar(t_buff *buffer, wchar_t c);
-size_t				ft_wcslen(wchar_t *s, long long precision);
+size_t				ft_wcslen(wchar_t *s, int precision);
 int					ft_printwstr(t_buff *buffer, t_arg *arg);
 
 int					ft_printnbr(t_buff *buffer, t_arg *arg);
