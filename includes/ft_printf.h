@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 18:13:12 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/30 18:11:05 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/04/03 15:42:28 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct		s_arg
 	long long		len;
 	long long		precision;
 	int				base;
-	int				negative;
+	int				sign;
 	char			type;
 	void			*target;
 	wchar_t			*widestr;
@@ -106,6 +106,7 @@ int					ft_printptr(t_buff *buffer, t_arg *arg);
 
 int					is_hex(char c);
 int					is_oct(char c);
+int					is_dec(char c);
 int					is_number(char c);
 
 #endif

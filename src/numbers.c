@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 21:19:04 by nlowe             #+#    #+#             */
-/*   Updated: 2017/04/02 23:47:51 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/04/03 15:17:55 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,20 @@ int		ft_setnbr(t_buff *buffer, t_arg *arg, int len,
 	}
 	return (ft_putbuff(buffer, out, len));
 }
-
-int		ft_printsign(t_buff *buffer, t_arg *arg, unsigned long long nbr)
+/*
+int		ft_printsign(t_buff *buffer, t_arg *arg, unsigned long long nbr, int print)
 {
+	char	ret[2];
+	int		i;
+
+	i = 0;
 	if (arg->negative)
 		return (ft_putbuff(buffer, "-", 1));
 	if (arg->type == 'u' || arg->type == 'U')
 		return (0);
 	if (has_flag(arg, '+') && arg->base == 10)
 		return (ft_putbuff(buffer, "+", 1));
-	if (has_flag(arg, ' '))
+	if (has_flag(arg, ' ') && !(is_hex(arg->type)))
 		return (ft_putbuff(buffer, " ", 1));
 	if (nbr == 0 && arg->type != 'p' && arg->precision == -1)
 		return (0);
@@ -81,6 +85,34 @@ int		ft_printsign(t_buff *buffer, t_arg *arg, unsigned long long nbr)
 		return ((ft_putbuff(buffer, "0", 1) +
 			ft_putbuff(buffer, &(arg->type), 1)));
 	return (0);
+}
+*/
+int		ft_printsign(t_buff *buffer, t_arg *arg, unsigned long long nbr, int print)
+{
+	char	ret[4];
+	int		i;
+
+	i = 0;
+	if (arg->sign == -1)
+		ret[i++] = '-';
+	else if (arg->sign == 1 && is_dec(arg->type) && arg->type != 'u')
+	{
+		if (has_flag(arg, '+'))
+			ret[i++] = '+';
+		else if (has_flag(arg, ' '))
+			ret[i++] = ' ';
+	}
+	if ((has_flag(arg, '#') && !(is_dec(arg->type)) &&
+		(nbr != 0 || (arg->precision == 0 && is_oct(arg->type))))
+		|| arg->type == 'p')
+	{
+		ret[i++] = '0';
+		if (arg->type == 'p')
+			ret[i++] = 'x';
+		else if (is_hex(arg->type))
+			ret[i++] = arg->type;
+	}
+	return (print ? ft_putbuff(buffer, ret, i) : i);
 }
 
 void	precision(t_arg *arg, int *digits, unsigned long long nbr)
@@ -107,13 +139,13 @@ int		ft_printnbr(t_buff *buffer, t_arg *arg)
 	arg->base = get_base(arg);
 	digits = ft_nbrlen(nbr, arg->base);
 	precision(arg, &digits, nbr);
-	arg->len += prefix_count(arg);
+	arg->len += ft_printsign(buffer, arg, nbr, 0);
 	if (has_flag(arg, '0'))
-		ret += ft_printsign(buffer, arg, nbr);
+		ret += ft_printsign(buffer, arg, nbr, 1);
 	if (!(has_flag(arg, '-')))
 		ret += padding(buffer, arg);
 	if (!(has_flag(arg, '0')))
-		ret += ft_printsign(buffer, arg, nbr);
+		ret += ft_printsign(buffer, arg, nbr, 1);
 	ret += ft_setnbr(buffer, arg, digits, nbr);
 	if (has_flag(arg, '-'))
 		ret += padding(buffer, arg);

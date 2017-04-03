@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 21:17:52 by nlowe             #+#    #+#             */
-/*   Updated: 2017/04/02 23:51:44 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/04/03 15:42:11 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	parse(const char *restrict format, va_list args, int *i, t_arg *ret)
 	else if (ret->width == -1 && ft_isdigit(format[*i])
 		&& format[*i] != '0')
 		check_width(format, ret, i);
-	else if (ret->width == -1 && format[*i] == '*')
+	else if (format[*i] == '*')
 		ret->width = va_arg(args, long long);
 	else if (ft_strchr(FT_PRINTF_LENGTH, format[*i]))
 		add_length_flag(ret, format[*i]);
@@ -46,6 +46,10 @@ static int	parse(const char *restrict format, va_list args, int *i, t_arg *ret)
 		check_precision(format, ret, args, i);
 	else
 		return (0);
+	if (ret->width < -1)
+		ret->width = -1;
+	if (ret->precision < -1)
+		ret->precision = -1;
 	return (1);
 }
 
@@ -71,11 +75,9 @@ int			new_arg(const char *restrict format, va_list args, int start, t_arg *ret)
 			break ;
 		i++;
 	}
-	if (format[i] && ft_strchr(FT_PRINTF_TYPES, format[i]))
-		ret->type = format[i];
-	else
-		return (0);
-		//ret->type = last_alpha(format, &i);
+	if (!(format[i]))
+		i--;
+	ret->type = format[i];
 	convert_caps(ret);
 	if (ret->type == 's' && ret->length_flag >= l)
 		ret->widestr = va_arg(args, wchar_t *);

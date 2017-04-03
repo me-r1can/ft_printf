@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 12:51:25 by nlowe             #+#    #+#             */
-/*   Updated: 2017/04/02 23:58:57 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/04/03 15:33:02 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,19 +84,19 @@ setlocale(LC_ALL, "en_US.utf8");
 
 #define VALUE 42
 
-#define DECIMAL "|%+    d|\n"
+#define DECIMAL "{%.*d}", -5, 42
 
 	printf("\n---DECIMAL---\n");
-	printf("u---> return: %d\n", ft_printf(DECIMAL, VALUE));
-//	printf("s---> return: %d\n", printf(DECIMAL, VALUE));
+	printf("u---> return: %d\n", ft_printf(DECIMAL));
+	printf("s---> return: %d\n", printf(DECIMAL));
 
 #define OCTAL "|%+O|\n"
 
 	printf("\n---OCTAL---\n");
-	printf("u---> return: %d\n", ft_printf(OCTAL, 42));
+	printf("u---> return: %d\n", ft_printf(OCTAL, -42));
 //	printf("s---> return: %d\n", printf(OCTAL, 0));
 
-#define HEXA "|%#X|\n"
+#define HEXA "|%#llX|\n"
 
 	printf("\n---HEX---\n");
 	printf("u---> return: %d\n", ft_printf(HEXA, VALUE));
@@ -153,6 +153,7 @@ setlocale(LC_ALL, "en_US.utf8");
 
 	printf("u---> return: %d\n", ft_printf("%10z", &free));
 	printf("s---> return: %d\n", printf("%10z", &free));
-
+	ft_printf("--%10z\n", &free);
+	printf("%10zq\n", &free);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 11:21:23 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/31 17:20:58 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/04/03 14:22:33 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int		ft_printchar(t_buff *buffer, t_arg *arg)
 		ret += ft_printnchar(buffer, '%');
 	else if (arg->length_flag == l)
 		ret += ft_printwchar(buffer, (wchar_t)arg->target);
-	else if (!(ft_strchr(FT_PRINTF_FLAGS, arg->type)))
+	else if (!(ft_strchr(FT_PRINTF_TYPES, arg->type)))
 		ret += ft_printnchar(buffer, arg->type);
 	else
 		ret += ft_printnchar(buffer, (char)arg->target);

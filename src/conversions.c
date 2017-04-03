@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 21:55:06 by nlowe             #+#    #+#             */
-/*   Updated: 2017/03/30 16:12:22 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/04/03 14:57:58 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ unsigned long long	get_negative(t_arg *arg)
 {
 	long long			l;
 
-	arg->negative = 0;
+	arg->sign = 1;
 	if (arg->target == NULL)
 		return (0);
 	if ((arg->type == 'd' || arg->type == 'i'))
@@ -24,7 +24,7 @@ unsigned long long	get_negative(t_arg *arg)
 		l = signed_convert(arg);
 		if (l < 0)
 		{
-			arg->negative = -1;
+			arg->sign = -1;
 			if (l < -9223372036854775807)
 				return (9223372036854775808ULL);
 			l *= -1;
@@ -36,7 +36,7 @@ unsigned long long	get_negative(t_arg *arg)
 
 int					prefix_count(t_arg *arg)
 {
-	if (arg->negative)
+	if (arg->sign)
 		return (1);
 	if (has_flag(arg, '+') && arg->base == 10)
 		return (1);
