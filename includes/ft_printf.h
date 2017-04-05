@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 18:13:12 by nlowe             #+#    #+#             */
-/*   Updated: 2017/04/05 17:02:57 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/04/05 18:29:10 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct		s_buff
 }					t_buff;
 
 int					ft_printf(const char *format, ...);
+int					ft_dprintf(int fd, const char *restrict format, ...);
 void				test_arg(t_arg *arg);
 int					ft_putbuff(t_buff *buffer, void *contents, size_t len);
 void				ft_flushbuff(t_buff *buffer);
@@ -72,7 +73,7 @@ int					padding(t_buff *buffer, t_arg *arg);
 int					has_flag(t_arg *arg, char flag);
 void				add_flag(t_arg *ret, char f);
 void				add_length_flag(t_arg *ret, char f);
-t_arg				create_arg(void);
+void				initialize_arg(t_arg *ret);
 int					new_arg(const char* restrict format, va_list args,
 	int i, t_arg *current);
 

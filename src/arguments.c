@@ -6,26 +6,23 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 21:17:52 by nlowe             #+#    #+#             */
-/*   Updated: 2017/04/05 16:52:40 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/04/05 18:17:30 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-t_arg		create_arg(void)
+void		initialize_arg(t_arg *ret)
 {
-	t_arg	ret;
-
-	ft_strclr(ret.flags);
-	ret.flag_count = 0;
-	ret.length_flag = none;
-	ret.width = -1;
-	ret.len = 0;
-	ret.precision = -1;
-	ret.type = 0;
-	ret.target = NULL;
-	ret.widestr = NULL;
-	return (ret);
+	ft_strclr(ret->flags);
+	ret->flag_count = 0;
+	ret->length_flag = none;
+	ret->width = -1;
+	ret->len = 0;
+	ret->precision = -1;
+	ret->type = 0;
+	ret->target = NULL;
+	ret->widestr = NULL;
 }
 
 static int	parse(const char *restrict format, va_list args, int *i, t_arg *ret)

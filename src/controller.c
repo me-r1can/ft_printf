@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 20:50:52 by nlowe             #+#    #+#             */
-/*   Updated: 2017/04/05 16:31:00 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/04/05 18:52:29 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ int		print(t_buff *buffer, t_arg *arg, int count)
 		return (0);
 	if (arg->type == 'n')
 	{
-		n = (int *)arg->target;
-		*n = count;
+		if ((n = (int *)arg->target))
+			*n = count;
 		return (0);
 	}
 	if (arg->type == 'p')

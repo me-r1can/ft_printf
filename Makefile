@@ -6,7 +6,7 @@
 #    By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/17 21:11:30 by nlowe             #+#    #+#              #
-#    Updated: 2017/04/05 16:36:39 by nlowe            ###   ########.fr        #
+#    Updated: 2017/04/05 18:49:42 by nlowe            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT)
-	@echo "\033[94m----------------------\n| ft_printf compiled |\n|       @nlowe       |\n----------------------\033[0m"
+	@echo "\033[93m----------------------\n| ft_printf compiled |\n|       @nlowe       |\n----------------------\033[0m"
 	@libtool -static -o $@ $(OBJ) $(addprefix $(LIBFT_PATH)/,$(LIBFT))
 	@ranlib $(NAME)
 
@@ -62,6 +62,8 @@ fclean: clean
 re: fclean all
 
 withmain: $(NAME)
-	$(CC) $(IFLAGS) -L. -lftprintf -o test.out testing/main.c
+	@echo "\033[94m----------------------\n| main test compiled |\n|       @nlowe       |\n----------------------\033[0m"
+	@touch test.txt
+	@$(CC) $(IFLAGS) -L. -lftprintf -o test.out testing/main.c
 
-.PHONYL: all, clean, fclean, re
+.PHONYL: all, clean, fclean, re, withmain

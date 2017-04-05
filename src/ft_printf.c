@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 18:02:15 by nlowe             #+#    #+#             */
-/*   Updated: 2017/04/05 17:01:42 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/04/05 18:39:33 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		ft_vdprintf(int fd, const char *restrict format, va_list ap)
 	{
 		if (format[i] == '%')
 		{
-			current = create_arg();
+			initialize_arg(&current);
 			if (i += new_arg(format, ap, i, &current))
 				ret += print(&buffer, &current, ret);
 		}
