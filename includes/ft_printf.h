@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 18:13:12 by nlowe             #+#    #+#             */
-/*   Updated: 2017/04/05 18:29:10 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/04/05 20:03:12 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,12 @@ int					has_flag(t_arg *arg, char flag);
 void				add_flag(t_arg *ret, char f);
 void				add_length_flag(t_arg *ret, char f);
 void				initialize_arg(t_arg *ret);
-int					new_arg(const char* restrict format, va_list args,
+int					new_arg(const char *restrict format, va_list args,
 	int i, t_arg *current);
 
-void				check_precision(const char * restrict format, t_arg *ret,
+void				check_precision(const char *restrict format, t_arg *ret,
 	va_list args, int *i);
-void				check_width(const char * restrict format, t_arg *ret,
+void				check_width(const char *restrict format, t_arg *ret,
 	va_list args, int *i);
 void				convert_caps(t_arg *ret);
 
