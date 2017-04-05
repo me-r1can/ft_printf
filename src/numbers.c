@@ -6,22 +6,11 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 21:19:04 by nlowe             #+#    #+#             */
-/*   Updated: 2017/04/03 17:10:45 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/04/05 16:55:19 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-int		get_base(t_arg *arg)
-{
-	if (is_hex(arg->type))
-		return (16);
-	if (is_oct(arg->type))
-		return (8);
-	if (arg->type == 'b' || arg->type == 'B')
-		return (2);
-	return (10);
-}
 
 int		ft_nbrlen(unsigned long long nbr, int base)
 {
@@ -59,7 +48,8 @@ int		ft_setnbr(t_buff *buffer, t_arg *arg, int len,
 	return (ft_putbuff(buffer, out, len));
 }
 
-int		ft_printsign(t_buff *buffer, t_arg *arg, unsigned long long nbr, int print)
+int		ft_printsign(t_buff *buffer, t_arg *arg, unsigned long long nbr,
+	int print)
 {
 	char	ret[4];
 	int		i;

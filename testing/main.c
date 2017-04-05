@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 12:51:25 by nlowe             #+#    #+#             */
-/*   Updated: 2017/04/03 17:04:15 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/04/05 17:04:43 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,20 @@ setlocale(LC_ALL, "en_US.utf8");
 
 #define VALUE 42
 
-#define DECIMAL "{%*3d}", 5, 0
+int i = 0;
+
+#define HEX_TEST "this%5\n", &i
+
+	printf("\n---HEX---\n");
+	printf("u---> return: %d\n", ft_printf(HEX_TEST));
+	printf("s---> return: %d\n", printf(HEX_TEST));
+
+#define DECIMAL "%6.0p\n", &i
 
 	printf("\n---DECIMAL---\n");
 	printf("u---> return: %d\n", ft_printf(DECIMAL));
 	printf("s---> return: %d\n", printf(DECIMAL));
+
 /*
 #define OCTAL "|%+O|\n"
 

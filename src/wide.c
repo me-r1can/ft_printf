@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 13:52:56 by nlowe             #+#    #+#             */
-/*   Updated: 2017/04/03 17:10:19 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/04/05 16:48:43 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int		ft_wcsize(int c)
 	if (c < 0)
 		c *= -1;
 	while (c >> len)
-		len++;
+		++len;
 	return (len);
 }
 
@@ -97,7 +97,7 @@ int				ft_printwstr(t_buff *buffer, t_arg *arg)
 	while (*(arg->widestr) && i < (int)(arg->len))
 	{
 		i += ft_printwchar(buffer, *(arg->widestr));
-		arg->widestr++;
+		(arg->widestr)++;
 	}
 	ret += i;
 	if (has_flag(arg, '-'))

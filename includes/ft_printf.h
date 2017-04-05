@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 18:13:12 by nlowe             #+#    #+#             */
-/*   Updated: 2017/04/03 16:52:15 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/04/05 17:02:57 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,13 @@
 # include "libft.h"
 
 # define BUFF_SIZE 10000
-# define FT_PRINTF_FLAGS "#0-+ $L'"
-# define FT_PRINTF_TYPES "sSpdDioOuUxXcCnb%"
+# define FT_PRINTF_FLAGS "#0-+ $'"
+# define FT_PRINTF_TYPES "sSpdDioOuUxXcCnb"
 # define FT_PRINTF_LENGTH "hljz"
 # define HEX "0123456789ABCDEF"
 # define SMALL_HEX "0123456789abcdef"
 # define MAX_INT_SIZE 50
 # define MAX_WCHAR 0x10FFFF
-
-//pdDioOuUxXeEfFgGaAn
-
-typedef enum		e_bool
-{
-	false = 0,
-	true = 1
-}					t_bool;
 
 typedef enum		e_length
 {
@@ -91,7 +83,7 @@ void				check_width(const char * restrict format, t_arg *ret,
 void				convert_caps(t_arg *ret);
 
 unsigned long long	get_negative(t_arg *arg);
-int					prefix_count(t_arg *arg);
+int					get_base(t_arg *arg);
 long long			signed_convert(t_arg *arg);
 unsigned long long	unsigned_convert(t_arg *arg);
 

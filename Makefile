@@ -6,7 +6,7 @@
 #    By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/17 21:11:30 by nlowe             #+#    #+#              #
-#    Updated: 2017/04/02 22:30:10 by nlowe            ###   ########.fr        #
+#    Updated: 2017/04/05 16:36:39 by nlowe            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,6 @@ SRC_NAME = arguments.c \
 			conversions.c \
 			numbers.c \
 			string.c \
-			travaux.c \
 			wide.c \
 			flags.c
 
@@ -41,6 +40,7 @@ OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT)
+	@echo "\033[94m----------------------\n| ft_printf compiled |\n|       @nlowe       |\n----------------------\033[0m"
 	@libtool -static -o $@ $(OBJ) $(addprefix $(LIBFT_PATH)/,$(LIBFT))
 	@ranlib $(NAME)
 
@@ -52,16 +52,16 @@ $(LIBFT):
 	@make -C$(LIBFT_PATH)
 
 clean:
-	rm -d -rf $(OBJ_PATH)
+	@rm -d -rf $(OBJ_PATH)
 	@make clean -C$(LIBFT_PATH)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 	@make fclean -C$(LIBFT_PATH)
 
 re: fclean all
 
 withmain: $(NAME)
-	$(CC) $(IFLAGS) -L. -lftprintf -o test.out src/main.c
+	$(CC) $(IFLAGS) -L. -lftprintf -o test.out testing/main.c
 
 .PHONYL: all, clean, fclean, re

@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 21:15:50 by nlowe             #+#    #+#             */
-/*   Updated: 2017/04/03 17:07:47 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/04/05 16:50:02 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,24 @@ void	check_precision(const char *restrict format, t_arg *ret,
 {
 	int		temp;
 
-	if (format[*i + 1] && format[*i + 1] == '*')
+	++(*i);
+	if (format[*i] == '*')
 	{
 		if (!(temp = va_arg(args, int)))
 			temp = 0;
 		if (ret->precision == -1)
 			ret->precision = temp;
-		(*i)++;
 	}
-	else if (format[*i + 1] && ft_isdigit(format[*i + 1]))
+	else if (ft_isdigit(format[*i]))
 	{
-		(*i)++;
-		ret->precision = ft_atoi(&(format[*i]));
-		while (ft_isdigit(format[*i]))
-			(*i)++;
-		(*i)--;
+		ret->precision = ft_atoi_inplace(format, i);
+		--(*i);
 	}
 	else
+	{
 		ret->precision = 0;
+		--(*i);
+	}
 	if (ret->precision < -1)
 		ret->precision = -1;
 }
@@ -49,9 +49,7 @@ void	check_width(const char *restrict format, t_arg *ret,
 	}
 	else
 	{
-		ret->width = ft_atoi(&format[*i]);
-		while (ft_isdigit(format[*i]))
-			(*i)++;
+		ret->width = ft_atoi_inplace(format, i);
 		(*i)--;
 	}
 	if (ret->width < -1)
@@ -63,7 +61,8 @@ void	check_width(const char *restrict format, t_arg *ret,
 
 void	add_flag(t_arg *ret, char f)
 {
-	ret->flags[(ret->flag_count)++] = f;
+	if (!(ft_strchr(ret->flags, f)))
+		ret->flags[(ret->flag_count)++] = f;
 }
 
 void	add_length_flag(t_arg *ret, char f)

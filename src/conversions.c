@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 21:55:06 by nlowe             #+#    #+#             */
-/*   Updated: 2017/04/03 14:57:58 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/04/05 16:36:04 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,15 @@ unsigned long long	get_negative(t_arg *arg)
 	return ((unsigned long long)unsigned_convert(arg));
 }
 
-int					prefix_count(t_arg *arg)
+int					get_base(t_arg *arg)
 {
-	if (arg->sign)
-		return (1);
-	if (has_flag(arg, '+') && arg->base == 10)
-		return (1);
-	if (has_flag(arg, ' '))
-		return (1);
-	if ((is_hex(arg->type) || arg->type == 'b')	&& has_flag(arg, '#'))
+	if (is_hex(arg->type))
+		return (16);
+	if (is_oct(arg->type))
+		return (8);
+	if (arg->type == 'b' || arg->type == 'B')
 		return (2);
-	if ((arg->type == 'o' || arg->type == 'O') && has_flag(arg, '#'))
-		return (1);
-	return (0);
+	return (10);
 }
 
 long long			signed_convert(t_arg *arg)

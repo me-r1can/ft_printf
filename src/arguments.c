@@ -6,7 +6,7 @@
 /*   By: nlowe <nlowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 21:17:52 by nlowe             #+#    #+#             */
-/*   Updated: 2017/04/03 17:14:23 by nlowe            ###   ########.fr       */
+/*   Updated: 2017/04/05 16:52:40 by nlowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,7 @@ t_arg		create_arg(void)
 static int	parse(const char *restrict format, va_list args, int *i, t_arg *ret)
 {
 	if (ft_strchr(FT_PRINTF_FLAGS, format[*i]))
-	{
-		if(!(ft_strchr(ret->flags, format[*i])))
-			add_flag(ret, format[*i]);
-	}
+		add_flag(ret, format[*i]);
 	else if (format[*i] == '*' || (ft_isdigit(format[*i]) && format[*i] != '0'))
 		check_width(format, ret, args, i);
 	else if (ft_strchr(FT_PRINTF_LENGTH, format[*i]))
@@ -46,28 +43,22 @@ static int	parse(const char *restrict format, va_list args, int *i, t_arg *ret)
 	return (1);
 }
 
-int			new_arg(const char *restrict format, va_list args, int start, t_arg *ret)
+int			new_arg(const char *restrict format, va_list args,
+	int start, t_arg *ret)
 {
 	int		i;
 
-	i = start;
-	if (!(format[i + 1]))
+	if (!(format[start + 1]))
 		return (0);
-	i++;
-	while (format[i] && !(ft_strchr(FT_PRINTF_TYPES, format[i])))
-	{
-		if (!(parse(format, args, &i, ret)))
-			break ;
-		i++;
-	}
-	if (!(format[i]))
-		i--;
-	ret->type = format[i];
+	i = start + 1;
+	while (!(ft_strchr(FT_PRINTF_TYPES, format[i])) &&
+		parse(format, args, &i, ret))
+		++i;
+	ret->type = (format[i] ? format[i] : format[i - 1]);
 	convert_caps(ret);
 	if (ret->type == 's' && ret->length_flag >= l)
 		ret->widestr = va_arg(args, wchar_t *);
-	else if (ft_strchr(FT_PRINTF_TYPES, ret->type) &&
-		!(ret->type == '%'))
+	else if (ft_strchr(FT_PRINTF_TYPES, ret->type))
 		ret->target = va_arg(args, void *);
 	return (i - start);
 }
